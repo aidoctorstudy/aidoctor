@@ -1,0 +1,146 @@
+{
+  "theme_and_brand": {
+    "name": "AI Doctor",
+    "tagline": "The AI Study Tool for Medical Students",
+    "footer_line": "Study smarter. Save lives.",
+    "theme_mode": "dark-first",
+    "aesthetic": "Apple-Level Premium Tech, Immersive 3D, Bioluminescent Medical",
+    "vibe": "Cutting-edge, trustworthy, highly polished, clinical but deeply engaging."
+  },
+  "typography": {
+    "strategy": "Apple-style geometric clarity. We are elevating from basic Inter to a premium combination that feels authoritative yet modern.",
+    "heading_font": "Outfit",
+    "heading_fallback": "Inter Display, system-ui",
+    "body_font": "Inter",
+    "scale": {
+      "h1": "text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tighter leading-tight",
+      "h2": "text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight",
+      "h3": "text-xl md:text-2xl font-medium tracking-tight",
+      "body_lg": "text-lg text-slate-300 leading-relaxed",
+      "body": "text-base text-slate-400 leading-relaxed",
+      "label": "text-xs font-semibold tracking-[0.2em] uppercase text-cyan-400"
+    },
+    "rules": [
+      "Headings over 32px MUST use tight letter spacing (tracking-tight or tracking-tighter).",
+      "Never use pure white text for body paragraphs; use text-slate-300 or text-slate-400.",
+      "Highlight key metrics or numbers in stats rows using font-light or font-semibold depending on contrast needs."
+    ]
+  },
+  "colors": {
+    "background": {
+      "base": "#0A0F1D",
+      "surface": "#0F172A",
+      "card": "rgba(22, 31, 56, 0.6)",
+      "card_hover": "rgba(28, 39, 69, 0.8)",
+      "glass": "rgba(15, 23, 42, 0.7)"
+    },
+    "primary": {
+      "blue": "#2563EB",
+      "cyan": "#06B6D4",
+      "mint": "#6EE7B7",
+      "gold": "#F59E0B",
+      "success": "#22C55E"
+    },
+    "text": {
+      "primary": "#F8FAFC",
+      "secondary": "#94A3B8",
+      "muted": "#64748B"
+    },
+    "borders": {
+      "default": "rgba(255,255,255,0.05)",
+      "subtle": "rgba(255,255,255,0.1)",
+      "glow": "rgba(6, 182, 212, 0.3)"
+    },
+    "gradients": {
+      "headline": "bg-gradient-to-r from-blue-400 via-cyan-400 to-emerald-300 text-transparent bg-clip-text",
+      "primary_btn": "bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400",
+      "card_glow": "bg-gradient-to-br from-blue-500/10 via-transparent to-cyan-500/10"
+    }
+  },
+  "visual_enhancers": {
+    "glassmorphism": {
+      "header": "backdrop-blur-xl bg-[#0A0F1D]/70 border-b border-white/5",
+      "cards": "backdrop-blur-md bg-[#161F38]/60 border border-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.3)]",
+      "badges": "backdrop-blur-sm bg-blue-500/10 border border-blue-500/20 text-cyan-300"
+    },
+    "lighting": "Use soft, ambient radial gradients behind main components to simulate glowing orbs (e.g., a massive absolute positioned div with blur-[120px] bg-blue-500/20).",
+    "borders": "Always use 1px inner borders with low opacity (rgba(255,255,255,0.05)) on dark mode cards to create physical depth."
+  },
+  "3d_libraries_and_implementation": {
+    "core_library": "react-three-fiber (@react-three/fiber) + @react-three/drei OR Framer Motion 3D. If avoiding heavy 3D bundles, use Framer Motion with SVG/CSS 3D transforms.",
+    "floating_dna_helix": {
+      "strategy": "Implement a 3D DNA Helix in the hero section using @react-three/fiber. Create two intertwined sine waves of spheres or glowing cylinders that rotate slowly on the Y axis.",
+      "material": "Use MeshPhysicalMaterial with transmission, roughness 0.2, and emissive cyan/blue to create a glowing glass/holographic look.",
+      "fallback": "If R3F is too complex, use @splinetool/react-spline with a public DNA spline model, OR create an abstract CSS/SVG DNA animation using Framer Motion."
+    },
+    "mouse_tilt_cards": {
+      "strategy": "Use Framer Motion's useMotionValue and useTransform to track mouse position relative to the card. Apply rotateX and rotateY based on mouse offset to create the classic Apple TV parallax tilt effect.",
+      "implementation": "Wrap the Features and Subjects cards in a tilt component. Include a glare/shine effect overlay that moves opposite to the mouse."
+    }
+  },
+  "motion_and_interactions": {
+    "magnetic_buttons": "Buttons should pull slightly toward the user's cursor when hovering within a defined radius. Use Framer Motion onPointerMove to offset the button's x/y coordinates by a fraction of the distance to the mouse.",
+    "scroll_reveals": "Every major section MUST animate in on scroll using Framer Motion's 'whileInView'. Use subtle upward translations (y: 40 to y: 0) and opacity fades (0 to 1) with easeOut/spring transitions. DO NOT fade in everything at once; stagger grid items (like Features and Subjects).",
+    "stats_counters": "Hero stats ('100+ Med Students', '8 Subjects') should use Framer Motion's 'useSpring' or 'animate' to count up from 0 when they enter the viewport."
+  },
+  "layouts_and_grids": {
+    "hero": "A deeply immersive, asymmetrical setup. Left column: Text content, badges, CTAs, live stats. Right/Background: Massive floating 3D DNA Helix glowing with cyan/blue ambient light.",
+    "features": "8 cards arranged in a 4x2 Bento grid. Use tight gaps (gap-6) and ensure cards stretch nicely. Icons should be oversized and subtly glowing.",
+    "subjects": "A clean 4x2 grid of square-ish cards. Each subject card should feature a subtle background texture or medical abstract icon. Hover state causes the card to lift and tilt.",
+    "pricing": "Side-by-side comparison. The 'Pro' card must visually dominate: slightly larger, glowing border (tracing beam effect), and deeper background shadow.",
+    "reviews": "Horizontal scrolling marquee of student reviews or a staggered masonry grid. Keep cards small, glassy, and focused on the student's portrait and text."
+  },
+  "component_guidelines": {
+    "navbar": "Fixed at top, fully transparent at scroll 0, becomes crystal glass (backdrop-blur-xl) after 20px of scrolling. CTA button 'Start Free' uses primary gradient.",
+    "buttons": "Pill-shaped (rounded-full). Primary buttons use gradient glow with inner shadow. Secondary buttons are glassy (bg-white/5 hover:bg-white/10).",
+    "badges": "Pill-shaped, glowing border, text tracking wide. Used in Hero ('Built for Medical Students') and Pricing ('Best for Med Students')."
+  },
+  "image_urls": {
+    "hero_background_abstract": {
+      "url": "https://images.unsplash.com/photo-1644325349124-d1756b79dd42",
+      "description": "Deep blue abstract dots and lines, use as a low-opacity background blend behind the hero if needed.",
+      "category": "backgrounds"
+    },
+    "3d_molecule_alternative": {
+      "url": "https://images.pexels.com/photos/25626587/pexels-photo-25626587.jpeg",
+      "description": "3D colorful molecular structure, use as fallback imagery for Features/Subjects if 3D elements fail to load.",
+      "category": "abstract_assets"
+    },
+    "review_portraits": [
+      {
+        "url": "https://images.unsplash.com/photo-1758600434196-635876d30f7b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1ODh8MHwxfHNlYXJjaHw0fHxuZXV0cmFsJTIwcG9ydHJhaXQlMjBkYXJrJTIwYmFja2dyb3VuZHxlbnwwfHx8fDE3ODIzMDQyNzd8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Female student reviewer avatar",
+        "category": "testimonials"
+      },
+      {
+        "url": "https://images.pexels.com/photos/36378236/pexels-photo-36378236.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Female student reviewer avatar 2",
+        "category": "testimonials"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1762733031326-73adceedbe1c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1ODh8MHwxfHNlYXJjaHwyfHxuZXV0cmFsJTIwcG9ydHJhaXQlMjBkYXJrJTIwYmFja2dyb3VuZHxlbnwwfHx8fDE3ODIzMDQyNzd8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Male student reviewer avatar",
+        "category": "testimonials"
+      }
+    ]
+  },
+  "instructions_to_main_agent": [
+    "Install necessary packages: `yarn add framer-motion @heroicons/react lucide-react clsx tailwind-merge`.",
+    "If implementing true 3D, install: `yarn add @react-three/fiber @react-three/drei three`. If not, simulate the DNA using a custom Framer Motion component or SVG.",
+    "Implement the 'Magnetic Hover' effect as a reusable wrapper component using Framer Motion.",
+    "Implement the 'Tilt Card' effect as a reusable wrapper component using useMotionValue and useTransform.",
+    "Use standard Shadcn primitives for Accordion (FAQ), but strip the Vercel styling and apply the custom glassmorphism borders and backgrounds.",
+    "Ensure the hero section immediately captures attention with the gradient text, glowing background orb, and the 3D DNA element.",
+    "All interactive elements MUST have the `data-testid` attribute (e.g., `data-testid=\"start-free-cta\"`).",
+    "Keep the entire layout responsive. On mobile, downgrade 3D effects to simpler animations to preserve performance, and stack the bento grids."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "Avoid generic centered layouts. Use Apple-style asymmetrical grids and generous negative space (p-8 to p-24).",
+    "Create depth through layered z-index hierarchy, backdrop blurs (12px to 24px), and 1px inner borders.",
+    "Do NOT apply global `transition: all`. Target specific properties to avoid breaking Framer Motion transforms.",
+    "Do NOT center align the entire app container text. Left-align dense copy for readability.",
+    "Always use modern button styles (pill-shaped or rounded-xl) with hover states.",
+    "Never use generic AI emojis (🤖💡) for icons. Use strictly Lucide or Heroicons for a premium tech look.",
+    "Implement smooth stagger animations for lists/grids when they enter the viewport."
+  ]
+}
