@@ -209,6 +209,23 @@ async function sendMsg(){
  if(typeof trackActivity==='function') trackActivity();
 }
 
+/* Wire the Ask-AI send button + Enter key (fixes mobile: tap on the button
+   or its inner SVG triggers send; Shift+Enter = newline, Enter = send). */
+(function wireChatSend(){
+ var sb=document.getElementById('sendBtn');
+ if(sb){
+ var fire=function(e){ if(e){e.preventDefault();} if(!sb.disabled) sendMsg(); };
+ sb.addEventListener('click',fire);
+ sb.addEventListener('touchend',fire,{passive:false});
+ }
+ var mi=document.getElementById('msgInput');
+ if(mi){
+ mi.addEventListener('keydown',function(e){
+ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); sendMsg(); }
+ });
+ }
+})();
+
 // FLASHCARDS
 document.getElementById('fcDrop').onclick=function(){document.getElementById('fcFile').click();};
 document.getElementById('fcFile').onchange=async function(e){var f=e.target.files[0];if(!f)return;
