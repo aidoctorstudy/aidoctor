@@ -1,0 +1,15 @@
+name = "aidoctorstudy"
+main = "aidoctor-worker.js"
+compatibility_date = "2024-11-01"
+
+# Plain (non-secret) vars — optional
+[vars]
+MODEL = "claude-3-5-sonnet-latest"
+ALLOWED_ORIGIN = "*"   # tighten to "https://aidoctor.study" in production
+
+# Secrets are NOT set here. Add them with wrangler:
+#   wrangler secret put ANTHROPIC_KEY
+#   wrangler secret put GROQ_KEY
+#   wrangler secret put GUMROAD_ACCESS_TOKEN
+#   wrangler secret put GUMROAD_PRODUCT_ID
+# ...or in the Cloudflare dashboard: Workers -> your worker -> Settings -> Variables and Secrets.
