@@ -1,146 +1,118 @@
 {
-  "theme_and_brand": {
-    "name": "AI Doctor",
-    "tagline": "The AI Study Tool for Medical Students",
-    "footer_line": "Study smarter. Save lives.",
-    "theme_mode": "dark-first",
-    "aesthetic": "Apple-Level Premium Tech, Immersive 3D, Bioluminescent Medical",
-    "vibe": "Cutting-edge, trustworthy, highly polished, clinical but deeply engaging."
-  },
+  "theme": "Medical Futurism / Apple-Level 3D Glow (Dark Mode Only)",
+  "concept": "A genuinely elevated, high-end medical-tech aesthetic utilizing deep blacks, bioluminescent cyan and emerald holographic accents, and 'Crystal Variant' glassmorphism. Moving beyond standard gradients into a spatial, dimensional web experience using CSS layering and Framer Motion.",
   "typography": {
-    "strategy": "Apple-style geometric clarity. We are elevating from basic Inter to a premium combination that feels authoritative yet modern.",
-    "heading_font": "Outfit",
-    "heading_fallback": "Inter Display, system-ui",
-    "body_font": "Inter",
-    "scale": {
-      "h1": "text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tighter leading-tight",
-      "h2": "text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight",
-      "h3": "text-xl md:text-2xl font-medium tracking-tight",
-      "body_lg": "text-lg text-slate-300 leading-relaxed",
-      "body": "text-base text-slate-400 leading-relaxed",
-      "label": "text-xs font-semibold tracking-[0.2em] uppercase text-cyan-400"
+    "headings": {
+      "family": "Cabinet Grotesk",
+      "fallback": "sans-serif",
+      "style": "Variable weight, tight tracking (tracking-tight to tracking-tighter).",
+      "usage": "Use for all main H1-H4 headings to create a bold, structural, editorial tech look."
     },
-    "rules": [
-      "Headings over 32px MUST use tight letter spacing (tracking-tight or tracking-tighter).",
-      "Never use pure white text for body paragraphs; use text-slate-300 or text-slate-400.",
-      "Highlight key metrics or numbers in stats rows using font-light or font-semibold depending on contrast needs."
-    ]
+    "body": {
+      "family": "Manrope",
+      "fallback": "sans-serif",
+      "style": "Clean, highly readable, geometric humanist.",
+      "usage": "Paragraphs, buttons, small labels."
+    },
+    "mono": {
+      "family": "JetBrains Mono",
+      "usage": "Use for stats, counters, and technical 'AI' data points."
+    }
   },
   "colors": {
-    "background": {
-      "base": "#0A0F1D",
-      "surface": "#0F172A",
-      "card": "rgba(22, 31, 56, 0.6)",
-      "card_hover": "rgba(28, 39, 69, 0.8)",
-      "glass": "rgba(15, 23, 42, 0.7)"
+    "base": {
+      "void_black": "#030712",
+      "obsidian": "#0A0A0A",
+      "surface_glass": "rgba(255, 255, 255, 0.03)"
     },
-    "primary": {
-      "blue": "#2563EB",
-      "cyan": "#06B6D4",
-      "mint": "#6EE7B7",
-      "gold": "#F59E0B",
-      "success": "#22C55E"
+    "accent": {
+      "bioluminescent_cyan": "#06B6D4",
+      "surgical_emerald": "#10B981",
+      "clinical_white": "#FFFFFF",
+      "holographic_blue": "#3B82F6"
     },
     "text": {
       "primary": "#F8FAFC",
       "secondary": "#94A3B8",
-      "muted": "#64748B"
-    },
-    "borders": {
-      "default": "rgba(255,255,255,0.05)",
-      "subtle": "rgba(255,255,255,0.1)",
-      "glow": "rgba(6, 182, 212, 0.3)"
+      "muted": "#475569"
     },
     "gradients": {
-      "headline": "bg-gradient-to-r from-blue-400 via-cyan-400 to-emerald-300 text-transparent bg-clip-text",
-      "primary_btn": "bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400",
-      "card_glow": "bg-gradient-to-br from-blue-500/10 via-transparent to-cyan-500/10"
+      "aurora": "radial-gradient(circle at 50% 50%, rgba(6,182,212,0.15), rgba(16,185,129,0.05), transparent 50%)",
+      "text_glow": "linear-gradient(to right, #ffffff, #94a3b8)",
+      "border_trace": "linear-gradient(90deg, transparent, rgba(6,182,212,0.8), transparent)"
     }
   },
-  "visual_enhancers": {
-    "glassmorphism": {
-      "header": "backdrop-blur-xl bg-[#0A0F1D]/70 border-b border-white/5",
-      "cards": "backdrop-blur-md bg-[#161F38]/60 border border-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.3)]",
-      "badges": "backdrop-blur-sm bg-blue-500/10 border border-blue-500/20 text-cyan-300"
+  "surfaces": {
+    "crystal_glass": {
+      "background": "bg-white/[0.02] or bg-black/40",
+      "backdrop": "backdrop-blur-2xl backdrop-saturate-150",
+      "border": "border border-white/10",
+      "shadow": "shadow-[0_8px_32px_rgba(0,0,0,0.4)]",
+      "usage": "Sticky Nav, Review Cards, Dialogs"
     },
-    "lighting": "Use soft, ambient radial gradients behind main components to simulate glowing orbs (e.g., a massive absolute positioned div with blur-[120px] bg-blue-500/20).",
-    "borders": "Always use 1px inner borders with low opacity (rgba(255,255,255,0.05)) on dark mode cards to create physical depth."
-  },
-  "3d_libraries_and_implementation": {
-    "core_library": "react-three-fiber (@react-three/fiber) + @react-three/drei OR Framer Motion 3D. If avoiding heavy 3D bundles, use Framer Motion with SVG/CSS 3D transforms.",
-    "floating_dna_helix": {
-      "strategy": "Implement a 3D DNA Helix in the hero section using @react-three/fiber. Create two intertwined sine waves of spheres or glowing cylinders that rotate slowly on the Y axis.",
-      "material": "Use MeshPhysicalMaterial with transmission, roughness 0.2, and emissive cyan/blue to create a glowing glass/holographic look.",
-      "fallback": "If R3F is too complex, use @splinetool/react-spline with a public DNA spline model, OR create an abstract CSS/SVG DNA animation using Framer Motion."
-    },
-    "mouse_tilt_cards": {
-      "strategy": "Use Framer Motion's useMotionValue and useTransform to track mouse position relative to the card. Apply rotateX and rotateY based on mouse offset to create the classic Apple TV parallax tilt effect.",
-      "implementation": "Wrap the Features and Subjects cards in a tilt component. Include a glare/shine effect overlay that moves opposite to the mouse."
+    "holo_card": {
+      "background": "bg-gradient-to-b from-white/[0.04] to-transparent",
+      "border": "border border-white/5 hover:border-cyan-500/30",
+      "glow": "hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]",
+      "transition": "transition-all duration-500 ease-out",
+      "usage": "Features, Subjects"
     }
   },
-  "motion_and_interactions": {
-    "magnetic_buttons": "Buttons should pull slightly toward the user's cursor when hovering within a defined radius. Use Framer Motion onPointerMove to offset the button's x/y coordinates by a fraction of the distance to the mouse.",
-    "scroll_reveals": "Every major section MUST animate in on scroll using Framer Motion's 'whileInView'. Use subtle upward translations (y: 40 to y: 0) and opacity fades (0 to 1) with easeOut/spring transitions. DO NOT fade in everything at once; stagger grid items (like Features and Subjects).",
-    "stats_counters": "Hero stats ('100+ Med Students', '8 Subjects') should use Framer Motion's 'useSpring' or 'animate' to count up from 0 when they enter the viewport."
+  "layouts": {
+    "spacing": "Generous. Use p-8 to p-12 for internal card padding, gap-8 to gap-12 for sections. Ensure high contrast and breathing room.",
+    "grids": "Bento-style asymmetric layouts (Tetris Grid). Avoid boring 4x2 grids. Mix col-span-1 and col-span-2 cards for visual tension.",
+    "hero": "Spatial depth. Instead of a basic 2D layout, center the hero with massive typography. Place a massive CSS-rendered or SVG 'Holographic' medical sphere/nodes behind the UI, rotating slowly with Framer Motion, blurred at the edges.",
+    "features": "Bento Grid (md:grid-cols-3 or 4). Feature 1 (Clinical Case Solver) spans 2 columns. Others span 1. Use 'Tracing Beam' border effect on the primary feature."
   },
-  "layouts_and_grids": {
-    "hero": "A deeply immersive, asymmetrical setup. Left column: Text content, badges, CTAs, live stats. Right/Background: Massive floating 3D DNA Helix glowing with cyan/blue ambient light.",
-    "features": "8 cards arranged in a 4x2 Bento grid. Use tight gaps (gap-6) and ensure cards stretch nicely. Icons should be oversized and subtly glowing.",
-    "subjects": "A clean 4x2 grid of square-ish cards. Each subject card should feature a subtle background texture or medical abstract icon. Hover state causes the card to lift and tilt.",
-    "pricing": "Side-by-side comparison. The 'Pro' card must visually dominate: slightly larger, glowing border (tracing beam effect), and deeper background shadow.",
-    "reviews": "Horizontal scrolling marquee of student reviews or a staggered masonry grid. Keep cards small, glassy, and focused on the student's portrait and text."
+  "motion": {
+    "library": "framer-motion",
+    "springs": "type: 'spring', stiffness: 100, damping: 20",
+    "reveals": "Staggered fade-up (y: 30, opacity: 0 -> 1) on scroll.",
+    "hover": "Subtle scale (1.02) + border glow + inner element translation (e.g., icon shifts right 4px).",
+    "background": "Slow-moving glowing radial gradients using absolute positioning and CSS animations."
   },
-  "component_guidelines": {
-    "navbar": "Fixed at top, fully transparent at scroll 0, becomes crystal glass (backdrop-blur-xl) after 20px of scrolling. CTA button 'Start Free' uses primary gradient.",
-    "buttons": "Pill-shaped (rounded-full). Primary buttons use gradient glow with inner shadow. Secondary buttons are glassy (bg-white/5 hover:bg-white/10).",
-    "badges": "Pill-shaped, glowing border, text tracking wide. Used in Hero ('Built for Medical Students') and Pricing ('Best for Med Students')."
-  },
-  "image_urls": {
-    "hero_background_abstract": {
-      "url": "https://images.unsplash.com/photo-1644325349124-d1756b79dd42",
-      "description": "Deep blue abstract dots and lines, use as a low-opacity background blend behind the hero if needed.",
-      "category": "backgrounds"
+  "components": {
+    "nav": "Floating Crystal Nav at the top. Not full width. Max-w-5xl, rounded-full, mt-6. backdrop-blur-2xl.",
+    "buttons": {
+      "primary": "Pill-shaped. bg-white text-black hover:bg-gray-200 font-bold tracking-tight shadow-[0_0_20px_rgba(255,255,255,0.3)].",
+      "secondary": "Glass pill. border border-white/20 bg-white/5 text-white hover:bg-white/10.",
+      "pro": "Moving gradient border, dark inner background, glowing cyan text."
     },
-    "3d_molecule_alternative": {
-      "url": "https://images.pexels.com/photos/25626587/pexels-photo-25626587.jpeg",
-      "description": "3D colorful molecular structure, use as fallback imagery for Features/Subjects if 3D elements fail to load.",
-      "category": "abstract_assets"
-    },
-    "review_portraits": [
+    "cards": "Holo-cards with 1px semi-transparent borders. Icons must be glowing (drop-shadow).",
+    "faq": "Shadcn accordion, but customized: border-b border-white/10, no background. Plus icon rotates 45deg on open."
+  },
+  "imagery": {
+    "usage": "Blend images with heavy black gradients (e.g., bg-black/60) so they act as texture, not flat photos.",
+    "urls": [
       {
-        "url": "https://images.unsplash.com/photo-1758600434196-635876d30f7b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1ODh8MHwxfHNlYXJjaHw0fHxuZXV0cmFsJTIwcG9ydHJhaXQlMjBkYXJrJTIwYmFja2dyb3VuZHxlbnwwfHx8fDE3ODIzMDQyNzd8MA&ixlib=rb-4.1.0&q=85",
-        "description": "Female student reviewer avatar",
-        "category": "testimonials"
+        "url": "https://images.unsplash.com/photo-1781707362828-4df57744e243?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2ODl8MHwxfHNlYXJjaHw0fHxtZWRpY2FsJTIwc2NpZW5jZSUyMGZ1dHVyaXN0aWMlMjAzZHxlbnwwfHx8fDE3ODM2ODU5NzF8MA&ixlib=rb-4.1.0&q=85",
+        "category": "Hero Background Texture",
+        "description": "Abstract medical shapes, set to low opacity (10%) behind the main content."
       },
       {
-        "url": "https://images.pexels.com/photos/36378236/pexels-photo-36378236.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        "description": "Female student reviewer avatar 2",
-        "category": "testimonials"
+        "url": "https://images.unsplash.com/photo-1690788210614-9052cffd8a14?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzd8MHwxfHNlYXJjaHwxfHxtZWRpY2FsJTIwc3R1ZGVudCUyMHN0dWR5aW5nJTIwZGFya3xlbnwwfHx8fDE3ODM2ODU5NzB8MA&ixlib=rb-4.1.0&q=85",
+        "category": "Reviews / Testimonials Backdrop",
+        "description": "Medical student studying in dark, use with heavy overlay."
       },
       {
-        "url": "https://images.unsplash.com/photo-1762733031326-73adceedbe1c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1ODh8MHwxfHNlYXJjaHwyfHxuZXV0cmFsJTIwcG9ydHJhaXQlMjBkYXJrJTIwYmFja2dyb3VuZHxlbnwwfHx8fDE3ODIzMDQyNzd8MA&ixlib=rb-4.1.0&q=85",
-        "description": "Male student reviewer avatar",
-        "category": "testimonials"
+        "url": "https://images.unsplash.com/photo-1546146477-15a587cd3fcb?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDB8MHwxfHNlYXJjaHwzfHxhYnN0cmFjdCUyMGRhcmslMjBmdXR1cmlzdGljJTIwdGVjaG5vbG9neXxlbnwwfHx8fDE3ODM2ODU5NzF8MA&ixlib=rb-4.1.0&q=85",
+        "category": "Pricing Section Background",
+        "description": "Abstract futuristic dark pattern."
       }
     ]
   },
-  "instructions_to_main_agent": [
-    "Install necessary packages: `yarn add framer-motion @heroicons/react lucide-react clsx tailwind-merge`.",
-    "If implementing true 3D, install: `yarn add @react-three/fiber @react-three/drei three`. If not, simulate the DNA using a custom Framer Motion component or SVG.",
-    "Implement the 'Magnetic Hover' effect as a reusable wrapper component using Framer Motion.",
-    "Implement the 'Tilt Card' effect as a reusable wrapper component using useMotionValue and useTransform.",
-    "Use standard Shadcn primitives for Accordion (FAQ), but strip the Vercel styling and apply the custom glassmorphism borders and backgrounds.",
-    "Ensure the hero section immediately captures attention with the gradient text, glowing background orb, and the 3D DNA element.",
-    "All interactive elements MUST have the `data-testid` attribute (e.g., `data-testid=\"start-free-cta\"`).",
-    "Keep the entire layout responsive. On mobile, downgrade 3D effects to simpler animations to preserve performance, and stack the bento grids."
-  ],
+  "accessibility": {
+    "contrast": "Ensure all text over gradients maintains 4.5:1 ratio. Use text-shadow on text overlapping any glow.",
+    "testing": "All buttons, links, and forms must have data-testid attributes (e.g., data-testid='hero-start-free-btn')."
+  },
   "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
-    "Avoid generic centered layouts. Use Apple-style asymmetrical grids and generous negative space (p-8 to p-24).",
-    "Create depth through layered z-index hierarchy, backdrop blurs (12px to 24px), and 1px inner borders.",
-    "Do NOT apply global `transition: all`. Target specific properties to avoid breaking Framer Motion transforms.",
-    "Do NOT center align the entire app container text. Left-align dense copy for readability.",
-    "Always use modern button styles (pill-shaped or rounded-xl) with hover states.",
-    "Never use generic AI emojis (🤖💡) for icons. Use strictly Lucide or Heroicons for a premium tech look.",
-    "Implement smooth stagger animations for lists/grids when they enter the viewport."
+    "Do NOT use HTML native selects or datepickers. Use Shadcn.",
+    "Do NOT center-align paragraph text. Keep body text left-aligned for readability.",
+    "Apply 'data-testid' to all interactive elements.",
+    "Avoid generic 'purple' AI slop. Stick to the Void Black + Bioluminescent Cyan/Emerald palette.",
+    "Implement the bento grids exactly as requested. Do NOT default to uniform 4x2 grids.",
+    "Use lucide-react for all standard icons, and framer-motion for all interactions.",
+    "DO NOT use generic transition: all. Target specific properties.",
+    "Ensure dark colors are not used as gradients."
   ]
 }
