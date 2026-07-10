@@ -1,5 +1,6 @@
-@import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap');
+/* Fonts are loaded non-render-blocking via <link> in public/index.html
+   (Cabinet Grotesk / Manrope / JetBrains Mono). CSS vars below fall back to
+   system fonts until they arrive, so the page paints instantly. */
 
 @tailwind base;
 @tailwind components;
