@@ -1,0 +1,30 @@
+{
+  "summary": "Frontend-only UI review of 'Medical Futurism' revamp for aidoctor.study. Ran 38 UI checks across landing hero + NodeSphere + live counters, signup dialog (invalid + valid + login mode), theme toggle w/ persistence, nav smooth-scroll to 4 sections, 8 feature bento cards, 8 subject cards, pricing (free + pro + Gumroad), FAQ accordion, reviews section w/ /api/reviews-driven cards, reviews CTA, and mobile menu on 390px viewport. 38/38 functionally passing.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Hero", "issues": ["H1 renders 'The AI Study Toolfor Medical Students' with no space between 'Tool' and 'for' in DOM textContent (visually fine because of <br>, but semantically the two words are joined — a screen reader will read 'Toolfor'. Consider adding a space or using two <span> wrappers with a space)."]},
+      {"screen": "Hero canvas", "issues": ["NodeSphere emits Canvas2D warning: 'Multiple readback operations using getImageData are faster with willReadFrequently=true'. Purely a perf hint, not a functional bug."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "(Optional / a11y) Add a space between the gradient 'AI Study Tool' span and the following 'for Medical Students' text in Hero H1 so it reads correctly to screen readers.",
+    "(Optional / perf) Pass willReadFrequently:true to getContext('2d') in NodeSphere to silence the Canvas2D readback warning."
+  ],
+  "critical_code_review_comments": [
+    "Pricing.jsx line 60 uses window.open(GUMROAD_URL, '_blank') inline — verified GUMROAD_URL is correctly bundled ('https://hyperai3.gumroad.com/l/aidoctorstudypro'). In Playwright headless, window.open('url','_blank') does not always trigger a new context 'page' event (popup blocker heuristic), even though it works for real users. Consider using an <a href target=_blank rel='noopener noreferrer'> for better UX + testability + SEO.",
+    "SignupDialog handles both signup + login modes in one dialog — nice reuse. Invalid email 'abc' correctly rejected (no success state shown).",
+    "Theme is persisted via html[data-theme] and survives reload — verified dark→light→reload→light."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "not tested (skipped per request)", "frontend": "100%"},
+  "test_credentials": "None required. Used test@med.school for waitlist POST.",
+  "seed_data_creation": "One TEST_User waitlist entry (email test@med.school) was created during the valid-signup flow. Can be cleaned via a TEST_ prefix filter or ignored — it's a valid-looking address so it doesn't harm the live landing.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "All data-testids from spec are present and working: node-sphere, live-counters, hero-signup-btn, nav-signup-btn, hero-login-btn/nav-login-btn, signup-dialog, signup-name-input, signup-email-input, signup-submit-btn, signup-success, theme-toggle, features-section/subjects-section/pricing-section/faq-section, feature-card-0..7, subject-card-0..7, pricing-free/pricing-pro/pricing-free-btn/pricing-pro-btn, faq-item-0..3, reviews-section, review-card-0..N, reviews-cta-btn, mobile-menu-btn, mobile-menu. Backend endpoints /api/stats, /api/reviews, /api/waitlist all responding (verified via live counters + reviews rendering + successful POST). Gumroad button: DO NOT assert new-tab via expect_page in headless — inspect React props.onClick and verify GUMROAD_URL is passed correctly.",
+  "rca of the issue": "No blocking issues. Two initial-run false negatives were artifacts of the test harness, not the app: (1) reviews-cta-btn click too soon after Escape (dialog was still animating shut) — passes on retest with 800ms wait; (2) pricing-pro-btn expect_page timeout — headless Chromium does not always propagate window.open('url','_blank') as a new BrowserContext page. Verified functionally correct by capturing the React onClick handler and confirming GUMROAD_URL bundles to the correct URL."
+}

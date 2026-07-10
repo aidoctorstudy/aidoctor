@@ -1,25 +1,19 @@
-import { useEffect, useState, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { GraduationCap, ArrowRight } from "lucide-react";
-import { MagneticButton, CountUp, Reveal } from "./primitives";
-import DnaHelix from "./DnaHelix";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { GraduationCap, ArrowRight, Sparkles } from "lucide-react";
+import { MagneticButton, CountUp } from "./primitives";
+import NodeSphere from "./NodeSphere";
 import { fetchStats } from "./api";
 
 const STATS = [
-  { num: 100, suffix: "+", label: "Med Students", tiny: "up to" },
+  { num: 100, suffix: "+", label: "Med Students" },
   { num: 8, suffix: "", label: "Subjects" },
-  { label: "USMLE", static: true, sub: "PLAB Ready" },
-  { label: "24/7", static: true, sub: "Always On" },
+  { text: "USMLE", label: "PLAB Ready" },
+  { text: "24/7", label: "Always On" },
 ];
 
 export default function Hero({ onSignup, onLogin }) {
   const [stats, setStats] = useState({ studying_now: 8, cards_today: 312, students_joined: 89 });
-  const sectionRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
-  const helixY = useTransform(scrollYProgress, [0, 1], [0, 140]);
-  const helixRotate = useTransform(scrollYProgress, [0, 1], [0, 18]);
-  const helixScale = useTransform(scrollYProgress, [0, 1], [1, 0.82]);
-  const textY = useTransform(scrollYProgress, [0, 1], [0, -60]);
 
   useEffect(() => {
     fetchStats().then(setStats).catch(() => {});
@@ -28,98 +22,91 @@ export default function Hero({ onSignup, onLogin }) {
   }, []);
 
   const live = [
-    { n: stats.studying_now, l: "Studying now", dot: true },
-    { n: stats.cards_today, l: "Cards generated today" },
-    { n: stats.students_joined, l: "Students joined" },
+    { n: stats.studying_now, l: "studying now", dot: true },
+    { n: stats.cards_today, l: "cards today" },
+    { n: stats.students_joined, l: "students joined" },
   ];
 
+  const ease = [0.22, 1, 0.36, 1];
+
   return (
-    <section ref={sectionRef} id="top" className="relative overflow-hidden px-5 pb-20 pt-28 sm:px-8 sm:pt-36" data-testid="hero" style={{ perspective: 1200 }}>
-      {/* ambient orbs */}
-      <div className="orb animate-floaty" style={{ width: 460, height: 460, top: -120, right: -80, background: "rgba(37,99,235,0.28)" }} />
-      <div className="orb animate-floaty" style={{ width: 360, height: 360, bottom: -60, left: -100, background: "rgba(6,182,212,0.20)", animationDelay: "3s" }} />
-      <div className="orb animate-floaty" style={{ width: 280, height: 280, top: "40%", left: "45%", background: "rgba(110,231,183,0.12)", animationDelay: "6s" }} />
+    <section id="top" className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 pb-24 pt-36 text-center" data-testid="hero">
+      {/* holographic node sphere */}
+      <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center">
+        <div className="relative h-[820px] w-[820px] max-w-[130vw] opacity-70" style={{ maskImage: "radial-gradient(circle, #000 45%, transparent 72%)", WebkitMaskImage: "radial-gradient(circle, #000 45%, transparent 72%)" }}>
+          <NodeSphere className="h-full w-full" />
+        </div>
+      </div>
+      {/* aurora */}
+      <div className="aurora animate-floaty" style={{ width: 520, height: 520, top: -120, left: "12%", background: "rgba(6,182,212,0.20)" }} />
+      <div className="aurora animate-floaty" style={{ width: 460, height: 460, bottom: -140, right: "10%", background: "rgba(16,185,129,0.16)", animationDelay: "4s" }} />
 
-      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
-        {/* LEFT */}
-        <motion.div style={{ y: textY }} className="text-center lg:text-left">
-          <Reveal>
-            <span className="inline-flex items-center gap-2 rounded-full border border-[var(--bd2)] bg-[var(--p)]/10 px-4 py-1.5 text-xs font-bold tracking-wide text-[var(--pl)]">
-              <GraduationCap className="h-4 w-4" /> Built for Medical Students
-            </span>
-          </Reveal>
+      <div className="relative z-10 mx-auto max-w-4xl">
+        <motion.span
+          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease }}
+          className="crystal inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold tracking-wide text-[var(--tx2)]"
+        >
+          <GraduationCap className="h-4 w-4 text-[var(--cyan)]" /> Built for Medical Students
+        </motion.span>
 
-          <Reveal delay={0.08}>
-            <h1 className="font-h mt-6 text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
-              The <span className="grad-text">AI Study Tool</span>
-              <br className="hidden sm:block" /> for Medical Students
-            </h1>
-          </Reveal>
+        <motion.h1
+          initial={{ opacity: 0, y: 26 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.08, ease }}
+          className="font-h mt-7 text-[2.75rem] font-extrabold leading-[0.98] tracking-tighter sm:text-7xl lg:text-[5.5rem]"
+        >
+          <span className="ink-text">The </span>
+          <span className="grad-text">AI Study Tool</span>
+          <br />
+          <span className="ink-text">for Medical Students</span>
+        </motion.h1>
 
-          <Reveal delay={0.16}>
-            <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-[var(--tx2)] sm:text-lg lg:mx-0">
-              Anatomy, Pharmacology, Pathology, Clinical Cases — all explained by AI,
-              personalized to your year and exam type.
-            </p>
-          </Reveal>
+        <motion.p
+          initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.16, ease }}
+          className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-[var(--tx2)] sm:text-lg"
+        >
+          Anatomy, Pharmacology, Pathology, Clinical Cases — explained by AI, personalized to your year and exam type.
+        </motion.p>
 
-          {/* live counters */}
-          <Reveal delay={0.24}>
-            <div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start" data-testid="live-counters">
-              {live.map((c, i) => (
-                <div key={i} className="glass glow-hover flex items-center gap-2.5 rounded-2xl px-4 py-2.5">
-                  {c.dot && <span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--ok)] opacity-75" /><span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--ok)]" /></span>}
-                  <span className="font-h text-lg font-bold grad-text">{(c.n ?? 0).toLocaleString()}</span>
-                  <span className="text-xs text-[var(--tx2)]">{c.l}</span>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.32}>
-            <div className="mt-8 flex flex-wrap justify-center gap-3.5 lg:justify-start">
-              <MagneticButton
-                onClick={onSignup} data-testid="hero-signup-btn"
-                className="btn-primary group flex items-center gap-2 rounded-full px-8 py-4 text-base font-bold"
-              >
-                Start For Free
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </MagneticButton>
-              <MagneticButton
-                onClick={onLogin} data-testid="hero-login-btn"
-                className="rounded-full border border-[var(--bd2)] bg-[var(--surface2)] px-8 py-4 text-base font-bold text-[var(--tx)]"
-              >
-                Log In
-              </MagneticButton>
-            </div>
-          </Reveal>
-
-          {/* stats row */}
-          <Reveal delay={0.4}>
-            <div className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 lg:justify-start" data-testid="hero-stats">
-              {STATS.map((s, i) => (
-                <div key={i} className="text-center lg:text-left">
-                  <div className="font-h text-2xl font-bold grad-text">
-                    {s.static ? s.label : <><CountUp to={s.num} suffix={s.suffix} /></>}
-                  </div>
-                  <div className="text-xs font-semibold text-[var(--tx3)]">{s.static ? s.sub : s.label}</div>
-                </div>
-              ))}
-            </div>
-          </Reveal>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.24, ease }}
+          className="mt-9 flex flex-wrap items-center justify-center gap-3.5"
+        >
+          <MagneticButton onClick={onSignup} data-testid="hero-signup-btn" className="btn-white group flex items-center gap-2 rounded-full px-8 py-4 text-base font-bold">
+            <Sparkles className="h-4 w-4" /> Start For Free
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </MagneticButton>
+          <MagneticButton onClick={onLogin} data-testid="hero-login-btn" className="btn-glass rounded-full px-8 py-4 text-base font-bold">
+            Log In
+          </MagneticButton>
         </motion.div>
 
-        {/* RIGHT — DNA helix */}
+        {/* live counters (mono) */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          style={{ y: helixY, rotateY: helixRotate, scale: helixScale, transformStyle: "preserve-3d" }}
-          className="relative mx-auto h-[380px] w-full max-w-md sm:h-[520px]"
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.36 }}
+          className="mt-10 flex flex-wrap items-center justify-center gap-2.5" data-testid="live-counters"
         >
-          <div className="ring-glow absolute inset-4 rounded-[40px]" />
-          <DnaHelix className="h-full w-full" />
-          <div className="pointer-events-none absolute -bottom-4 left-1/2 h-24 w-64 -translate-x-1/2 rounded-full bg-[var(--p2)]/20 blur-3xl" />
+          {live.map((c, i) => (
+            <div key={i} className="crystal flex items-center gap-2 rounded-full px-4 py-2">
+              {c.dot && <span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--emerald)] opacity-75" /><span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--emerald)]" /></span>}
+              <span className="font-mono2 text-sm font-bold text-[var(--cyan)]">{(c.n ?? 0).toLocaleString()}</span>
+              <span className="text-xs text-[var(--tx2)]">{c.l}</span>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* stats */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.1, ease }}
+          className="mx-auto mt-12 grid max-w-2xl grid-cols-4 gap-4 border-t border-[var(--bd)] pt-8" data-testid="hero-stats"
+        >
+          {STATS.map((s, i) => (
+            <div key={i}>
+              <div className="font-mono2 text-xl font-bold text-[var(--tx)] sm:text-2xl">
+                {s.text ? s.text : <CountUp to={s.num} suffix={s.suffix} />}
+              </div>
+              <div className="mt-1 text-[11px] font-semibold uppercase tracking-wider text-[var(--tx3)]">{s.label}</div>
+            </div>
+          ))}
         </motion.div>
       </div>
     </section>
