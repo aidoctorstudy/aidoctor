@@ -13,7 +13,7 @@ export default function DnaHelix({ className = "" }) {
   useEffect(() => {
     const canvas = canvasRef.current;
     const wrap = wrapRef.current;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
     let raf;
     let t = 0;
     let dpr = Math.min(window.devicePixelRatio || 1, 2);
