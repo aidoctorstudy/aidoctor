@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { GraduationCap, ArrowRight, Sparkles } from "lucide-react";
 import { MagneticButton, CountUp } from "./primitives";
-import NodeSphere from "./NodeSphere";
+import DnaHelix from "./DnaHelix";
 import { fetchStats } from "./api";
 
 const STATS = [
@@ -31,10 +31,10 @@ export default function Hero({ onSignup, onLogin }) {
 
   return (
     <section id="top" className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 pb-24 pt-36 text-center" data-testid="hero">
-      {/* holographic node sphere */}
+      {/* floating 3D DNA helix (green + cyan glow) */}
       <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center">
-        <div className="relative h-[820px] w-[820px] max-w-[130vw] opacity-70" style={{ maskImage: "radial-gradient(circle, #000 45%, transparent 72%)", WebkitMaskImage: "radial-gradient(circle, #000 45%, transparent 72%)" }}>
-          <NodeSphere className="h-full w-full" />
+        <div className="relative h-[115%] w-[420px] max-w-[80vw] opacity-70" style={{ maskImage: "radial-gradient(ellipse 60% 55% at 50% 50%, #000 30%, transparent 78%)", WebkitMaskImage: "radial-gradient(ellipse 60% 55% at 50% 50%, #000 30%, transparent 78%)" }}>
+          <DnaHelix className="h-full w-full" />
         </div>
       </div>
       {/* aurora */}
@@ -54,7 +54,7 @@ export default function Hero({ onSignup, onLogin }) {
           className="font-h mt-7 text-[2.75rem] font-extrabold leading-[0.98] tracking-tighter sm:text-7xl lg:text-[5.5rem]"
         >
           <span className="ink-text">The </span>
-          <span className="grad-text">AI Study Tool</span>
+          <span className="grad-text">AI Study Tool</span>{" "}
           <br />
           <span className="ink-text">for Medical Students</span>
         </motion.h1>

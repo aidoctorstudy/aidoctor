@@ -71,9 +71,9 @@ export default function DnaHelix({ className = "" }) {
         const B = nodes[i * 2 + 1];
         const depth = (A.depth + B.depth) / 2;
         const g = ctx.createLinearGradient(A.x, A.y, B.x, B.y);
-        g.addColorStop(0, `rgba(96,165,250,${0.12 + depth * 0.45})`);
-        g.addColorStop(0.5, `rgba(103,232,249,${0.12 + depth * 0.5})`);
-        g.addColorStop(1, `rgba(110,231,183,${0.12 + depth * 0.45})`);
+        g.addColorStop(0, `rgba(6,182,212,${0.12 + depth * 0.45})`);
+        g.addColorStop(0.5, `rgba(52,211,153,${0.12 + depth * 0.5})`);
+        g.addColorStop(1, `rgba(16,185,129,${0.12 + depth * 0.45})`);
         ctx.strokeStyle = g;
         ctx.lineWidth = (0.8 + depth * 2) * ((A.persp + B.persp) / 2);
         ctx.beginPath();
@@ -87,9 +87,9 @@ export default function DnaHelix({ className = "" }) {
       for (const n of nodes) {
         const r = (2.2 + n.depth * 5.6) * n.persp;
         const alpha = 0.2 + n.depth * 0.8;
-        const cr = Math.round(lerp(37, 6, n.p));
-        const cg = Math.round(lerp(99, 182, n.p));
-        const cb = Math.round(lerp(235, 212, n.p));
+        const cr = Math.round(lerp(6, 16, n.p));
+        const cg = Math.round(lerp(182, 185, n.p));
+        const cb = Math.round(lerp(212, 129, n.p));
         const glow = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 3);
         glow.addColorStop(0, `rgba(${cr},${cg},${cb},${alpha})`);
         glow.addColorStop(1, `rgba(${cr},${cg},${cb},0)`);

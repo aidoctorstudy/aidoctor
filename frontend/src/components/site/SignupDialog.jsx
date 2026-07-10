@@ -8,9 +8,10 @@ import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
-import { Loader2, Activity, CheckCircle2 } from "lucide-react";
+import { Loader2, CheckCircle2 } from "lucide-react";
 import { joinWaitlist } from "./api";
 import { YEAR_OPTIONS, EXAM_OPTIONS } from "./content";
+import LogoMark from "./Logo";
 
 export default function SignupDialog({ open, onOpenChange, mode = "signup" }) {
   const [name, setName] = useState("");
@@ -60,9 +61,7 @@ export default function SignupDialog({ open, onOpenChange, mode = "signup" }) {
           <>
             <DialogHeader>
               <div className="mb-1 flex items-center gap-2">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[var(--cyan)] to-[var(--emerald)]">
-                  <Activity className="h-5 w-5 text-black" strokeWidth={2.5} />
-                </div>
+                <LogoMark className="h-9 w-9" />
                 <span className="font-h text-lg font-extrabold tracking-tight">AI Doctor</span>
               </div>
               <DialogTitle className="font-h text-2xl font-extrabold tracking-tight">

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sun, Moon, Activity, Menu, X } from "lucide-react";
+import { Sun, Moon, Menu, X } from "lucide-react";
 import { NAV_LINKS } from "./content";
+import LogoMark from "./Logo";
 
 export default function Navbar({ theme, toggleTheme, onLogin, onSignup }) {
   const [scrolled, setScrolled] = useState(false);
@@ -26,9 +27,7 @@ export default function Navbar({ theme, toggleTheme, onLogin, onSignup }) {
         scrolled ? "crystal" : "border border-transparent"
       }`}>
         <a href="#top" className="flex items-center gap-2.5" data-testid="nav-logo">
-          <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-[var(--cyan)] to-[var(--emerald)] shadow-[0_0_20px_rgba(6,182,212,0.55)]">
-            <Activity className="h-4.5 w-4.5 text-black" strokeWidth={2.5} />
-          </div>
+          <LogoMark className="h-9 w-9 drop-shadow-[0_0_10px_rgba(6,182,212,0.5)]" />
           <span className="font-h text-lg font-extrabold tracking-tight">AI Doctor</span>
         </a>
 
