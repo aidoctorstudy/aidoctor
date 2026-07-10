@@ -265,6 +265,12 @@
  </select>
  </div>
 
+ <!-- Terms acceptance (shown for Sign Up) -->
+ <label id="medTermsWrap" style="display:flex;align-items:flex-start;gap:8px;margin:-2px 0 1rem;font-size:12px;line-height:1.5;color:var(--tx3);font-weight:600;cursor:pointer">
+ <input type="checkbox" id="medAcceptTerms" style="margin-top:2px;flex:none;width:15px;height:15px;accent-color:#2563eb;cursor:pointer"/>
+ <span>I accept the <a href="/terms.html" target="_blank" rel="noopener" style="color:var(--p-lite);font-weight:800;text-decoration:underline">Terms of Service</a> and <a href="/privacy.html" target="_blank" rel="noopener" style="color:var(--p-lite);font-weight:800;text-decoration:underline">Privacy Policy</a>, and understand AI Doctor is an educational tool that can make mistakes and is not medical advice.</span>
+ </label>
+
  <button class="ob-btn" id="startBtn" onclick="signUpEmail()">Start Studying </button>
 
  <div style="text-align:center;margin-top:1rem;font-size:13px;color:var(--tx3);font-weight:600" id="medAuthToggle">

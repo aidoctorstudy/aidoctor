@@ -32,6 +32,10 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 
 function signInWithGoogle() {
+ if(typeof medAuthMode !== 'undefined' && medAuthMode === 'signup') {
+  var gAccept = document.getElementById('medAcceptTerms');
+  if(gAccept && !gAccept.checked) { showMedAuthErr('Please accept the Terms of Service and Privacy Policy to continue'); return; }
+ }
  // Try popup first, fall back to redirect
  fbAuth.signInWithPopup(gProvider)
  .then(function(result) {
@@ -51,6 +55,7 @@ function signInWithGoogle() {
  document.getElementById('medPass').closest('.form-field').style.display = 'none';
  document.getElementById('medForgotWrap').style.display = 'none';
  document.getElementById('medAuthToggle').style.display = 'none';
+ var _tw = document.getElementById('medTermsWrap'); if(_tw) _tw.style.display = 'none';
  // Hide google button and divider
  var btns = document.querySelectorAll('#pg-onboard button');
  btns[0].style.display = 'none'; // google btn
@@ -85,6 +90,8 @@ function signUpEmail() {
  if(!n||!e||!p) { showMedAuthErr('Please fill in all fields'); return; }
  if(p.length < 6) { showMedAuthErr('Password must be at least 6 characters'); return; }
  if(!y) { showMedAuthErr('Please select your year of study'); return; }
+ var accept = document.getElementById('medAcceptTerms');
+ if(accept && !accept.checked) { showMedAuthErr('Please accept the Terms of Service and Privacy Policy to continue'); return; }
  var btn = document.getElementById('startBtn'); btn.disabled=true; btn.textContent='Creating account...';
  sName=n; sYear=y; sExam=ex||'MBBS';
  fbAuth.createUserWithEmailAndPassword(e, p)
@@ -202,6 +209,7 @@ function toggleMedAuth() {
  var yearWrap = document.getElementById('medYearWrap');
  var examWrap = document.getElementById('medExamWrap');
  var forgot = document.getElementById('medForgotWrap');
+ var terms = document.getElementById('medTermsWrap');
  var title = document.getElementById('medAuthTitle');
  var sub = document.getElementById('medAuthSub');
  if(medAuthMode === 'login') {
@@ -213,6 +221,7 @@ function toggleMedAuth() {
  yearWrap.style.display = 'none';
  examWrap.style.display = 'none';
  forgot.style.display = 'block';
+ if(terms) terms.style.display = 'none';
  toggle.innerHTML = 'No account? <a onclick="toggleMedAuth()" style="color:var(--p-lite);font-weight:800;cursor:pointer">Sign Up Free</a>';
  } else {
  title.textContent = 'Welcome, Doctor-in-training! ';
@@ -223,6 +232,7 @@ function toggleMedAuth() {
  yearWrap.style.display = 'block';
  examWrap.style.display = 'block';
  forgot.style.display = 'none';
+ if(terms) terms.style.display = 'flex';
  toggle.innerHTML = 'Already have an account? <a onclick="toggleMedAuth()" style="color:var(--p-lite);font-weight:800;cursor:pointer">Log In</a>';
  }
  document.getElementById('medAuthErr').style.display = 'none';

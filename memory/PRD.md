@@ -85,3 +85,12 @@ Tagline: "The AI Study Tool for Medical Students". Footer: "Study smarter. Save 
   privacy page renders (screenshot). 
 - **User actions (need their login):** Google Search Console + Bing Webmaster Tools verification & sitemap
   submission; IndexNow ping. Ranking/AI-answer inclusion takes days–weeks after indexing.
+
+## Signup consent (2026-07-10)
+- Added an "I accept the Terms of Service and Privacy Policy" checkbox (`#medAcceptTerms`) to the static
+  app signup form (`public/app/index.html`), with links to /terms.html and /privacy.html + AI/medical
+  disclaimer text. Shown in Sign Up mode, hidden in Log In mode.
+- Gate enforced on ALL signup entry points: `01-core-utils.js` startBtn handler (the DEFAULT active one —
+  it overrides the inline onclick), plus `auth.js signUpEmail()` and `signInWithGoogle()` (signup mode).
+  Blocks with error until checked.
+- Verified via browser automation: unchecked → blocked + error; checked → enters app.

@@ -106,6 +106,8 @@ document.getElementById('startBtn').onclick=function(){
  var y=document.getElementById('obYear').value;
  var e=document.getElementById('obExam').value;
  if(!n||!y){alert('Please fill in your name and year!');return;}
+ var _accept=document.getElementById('medAcceptTerms');
+ if(_accept && !_accept.checked){ if(typeof showMedAuthErr==='function'){showMedAuthErr('Please accept the Terms of Service and Privacy Policy to continue');}else{alert('Please accept the Terms of Service and Privacy Policy to continue');} return; }
  sName=n; sYear=y; sExam=e||'MBBS';
  document.getElementById('sideAvatar').textContent=n[0].toUpperCase();
  document.getElementById('dashName').textContent=n;
