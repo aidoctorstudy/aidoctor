@@ -61,7 +61,7 @@ export default function SignupDialog({ open, onOpenChange, mode = "signup" }) {
           <>
             <DialogHeader>
               <div className="mb-1 flex items-center gap-2">
-                <LogoMark className="h-9 w-9" />
+                <LogoMark className="h-9 w-auto" />
                 <span className="font-h text-lg font-extrabold tracking-tight">AI Doctor</span>
               </div>
               <DialogTitle className="font-h text-2xl font-extrabold tracking-tight">

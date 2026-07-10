@@ -27,7 +27,7 @@ export default function Navbar({ theme, toggleTheme, onLogin, onSignup }) {
         scrolled ? "crystal" : "border border-transparent"
       }`}>
         <a href="#top" className="flex items-center gap-2.5" data-testid="nav-logo">
-          <LogoMark className="h-9 w-9 drop-shadow-[0_0_10px_rgba(6,182,212,0.5)]" />
+          <LogoMark className="h-9 w-auto drop-shadow-[0_0_12px_rgba(6,182,212,0.45)]" />
           <span className="font-h text-lg font-extrabold tracking-tight">AI Doctor</span>
         </a>
 
