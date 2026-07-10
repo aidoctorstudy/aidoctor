@@ -14,6 +14,8 @@ export default function Footer() {
             <a key={l.href} href={l.href} className="font-semibold text-[var(--tx2)] transition-colors hover:text-[var(--cyan)]">{l.label}</a>
           ))}
           <a href={`mailto:${CONTACT_EMAIL}`} data-testid="footer-contact" className="font-semibold text-[var(--tx2)] transition-colors hover:text-[var(--cyan)]">Contact</a>
+          <a href="/privacy.html" data-testid="footer-privacy" className="font-semibold text-[var(--tx2)] transition-colors hover:text-[var(--cyan)]">Privacy</a>
+          <a href="/terms.html" data-testid="footer-terms" className="font-semibold text-[var(--tx2)] transition-colors hover:text-[var(--cyan)]">Terms</a>
         </div>
         <p className="font-mono2 mt-2 text-xs text-[var(--tx3)]">© 2026 AI DOCTOR · AIDOCTOR.STUDY</p>
       </div>

@@ -63,3 +63,25 @@ Tagline: "The AI Study Tool for Medical Students". Footer: "Study smarter. Save 
 - **Verified:** Rebuilt with `REACT_APP_BACKEND_URL=""` (exact Vercel condition) → renders fully, ZERO page
   errors (was 1 crash before). Vercel Root Directory = `frontend` is CORRECT.
 - **User action required:** Push to GitHub via "Save to Github" so Vercel redeploys the fixed commit.
+
+## Launch: Legal + SEO (2026-07-10)
+- **Legal pages (static HTML, crawler-friendly, dark-theme styled):**
+  - `public/privacy.html` — prominent Medical & AI Disclaimer (AI can be wrong, not medical advice,
+    use at own risk, no-liability), data collection (waitlist email, Firebase accounts), GDPR rights,
+    cookies, third parties (Firebase/Gumroad/AI providers), contact studevoai@gmail.com.
+  - `public/terms.html` — educational-use-only disclaimer, acceptable use, subscriptions (Gumroad Pro),
+    AS-IS warranty disclaimer, Limitation of Liability, indemnification, generic governing law.
+  - Footer links added (`footer-privacy`, `footer-terms`).
+- **SEO / AI discoverability:**
+  - `index.html`: canonical, keywords, Open Graph (og:title/description/image/url/site_name), Twitter card,
+    JSON-LD @graph (Organization + WebSite + SoftwareApplication with Free/Pro offers). og:image = /aidoctor-logo.png.
+  - `public/robots.txt`: allows all + explicit AI crawlers (GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot,
+    Claude-Web, anthropic-ai, PerplexityBot, Google-Extended, Applebot-Extended) + Sitemap ref.
+  - `public/sitemap.xml`: home, /app/, privacy, terms.
+  - `public/llms.txt`: AI-assistant index describing product, features, subjects, disclaimer, links.
+  - IndexNow key file: `public/fc8ff56c23cefdf3d10a12854453f357.txt` (key: fc8ff56c23cefdf3d10a12854453f357).
+  - Root+frontend `vercel.json` rewrites now exclude dotted files (static SEO files always serve).
+- **Verified:** all files serve on preview with correct content-types; OG/JSON-LD present in served HTML;
+  privacy page renders (screenshot). 
+- **User actions (need their login):** Google Search Console + Bing Webmaster Tools verification & sitemap
+  submission; IndexNow ping. Ranking/AI-answer inclusion takes days–weeks after indexing.

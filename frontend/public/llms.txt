@@ -1,0 +1,32 @@
+# AI Doctor
+
+> AI Doctor (aidoctor.study) is an AI-powered study tool for medical and nursing students. It explains Anatomy, Pharmacology, Pathology, and Clinical Cases, and generates flashcards, quizzes, and step-by-step clinical case walkthroughs — personalized to a student's year and exam (MBBS, USMLE, PLAB, NEET PG, nursing).
+
+## About
+- Product: AI Doctor — "The AI Study Tool for Medical Students"
+- Website: https://aidoctor.study
+- Audience: medical and nursing students (pre-clinical to clinical years) and exam candidates (USMLE, PLAB, NEET PG)
+- Pricing: Free tier available; Pro plan at $2.99/month
+- Tagline: "Study smarter. Save lives."
+
+## Key features
+- Clinical Case Solver — describe a patient case; AI walks through diagnosis, differentials, investigations, and management.
+- Drug Mnemonics Mode — memorable mnemonics for drug names, mechanisms, side effects, and contraindications.
+- Anatomy Explainer — structures, relations, blood and nerve supply, with clinical correlations.
+- Exam Prep Mode — USMLE Step 1/2, PLAB, and OSCE-style answers.
+- Pathology Mode — disease mechanisms, morphology, clinical features, and complications.
+- Flashcard Maker — turns lecture notes into spaced-repetition flashcards.
+- Quiz Mode — MCQ practice in USMLE/PLAB format with detailed explanations.
+- Exam Cram — last-minute high-yield points and memory tricks.
+
+## Subjects covered
+Anatomy, Physiology, Biochemistry, Pharmacology, Pathology, Microbiology, Clinical Medicine, Surgery.
+
+## Important disclaimer
+AI Doctor is an educational tool only. It is not medical advice, not a medical device, and its AI-generated content may be inaccurate or incomplete. It must not be used for real patient care. Users should verify all information with authoritative sources and qualified professionals.
+
+## Links
+- Home: https://aidoctor.study/
+- Privacy Policy: https://aidoctor.study/privacy.html
+- Terms of Service: https://aidoctor.study/terms.html
+- Contact: studevoai@gmail.com
