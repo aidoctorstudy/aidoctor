@@ -26,7 +26,7 @@ export default function Reviews({ onSignup }) {
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {reviews.map((r, i) => (
             <Reveal key={r.id || i} delay={(i % 3) * 0.08}>
-              <TiltCard intensity={6} className="glass h-full rounded-3xl p-6" data-testid={`review-card-${i}`}>
+              <TiltCard intensity={8} className="glass glow-hover conic-glow h-full rounded-3xl p-6" data-testid={`review-card-${i}`}>
                 <div className="mb-3 flex gap-0.5">
                   {Array.from({ length: r.rating || 5 }).map((_, k) => (
                     <Star key={k} className="h-4 w-4 fill-[var(--gold)] text-[var(--gold)]" />

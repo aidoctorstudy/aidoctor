@@ -67,7 +67,7 @@ export default function Hero({ onSignup, onLogin }) {
           <Reveal delay={0.24}>
             <div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start" data-testid="live-counters">
               {live.map((c, i) => (
-                <div key={i} className="glass flex items-center gap-2.5 rounded-2xl px-4 py-2.5">
+                <div key={i} className="glass glow-hover flex items-center gap-2.5 rounded-2xl px-4 py-2.5">
                   {c.dot && <span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--ok)] opacity-75" /><span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--ok)]" /></span>}
                   <span className="font-h text-lg font-bold grad-text">{(c.n ?? 0).toLocaleString()}</span>
                   <span className="text-xs text-[var(--tx2)]">{c.l}</span>

@@ -1,5 +1,4 @@
-import { motion } from "framer-motion";
-import { Reveal } from "./primitives";
+import { Reveal, TiltCard } from "./primitives";
 import { SUBJECTS } from "./content";
 
 export default function Subjects() {
@@ -17,18 +16,17 @@ export default function Subjects() {
             const Icon = s.icon;
             return (
               <Reveal key={s.title} delay={(i % 4) * 0.06}>
-                <motion.div
-                  whileHover={{ y: -8, rotate: -0.6 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="glass group flex h-full flex-col items-start rounded-3xl p-6 transition-colors duration-300 hover:bg-[var(--card-hover)]"
+                <TiltCard
+                  intensity={12}
+                  className="glass glow-hover conic-glow group flex h-full flex-col items-start rounded-3xl p-6 transition-colors duration-300 hover:bg-[var(--card-hover)]"
                   data-testid={`subject-card-${i}`}
                 >
-                  <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[var(--p)]/20 to-[var(--p2)]/20 ring-1 ring-[var(--bd2)] transition-transform duration-300 group-hover:scale-110">
+                  <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[var(--p)]/20 to-[var(--p2)]/20 ring-1 ring-[var(--bd2)] transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(6,182,212,0.55)]" style={{ transform: "translateZ(55px)" }}>
                     <Icon className="h-7 w-7 text-[var(--pl)]" />
                   </div>
-                  <h3 className="font-h text-lg font-semibold">{s.title}</h3>
-                  <p className="mt-1 text-sm text-[var(--tx3)]">{s.desc}</p>
-                </motion.div>
+                  <h3 className="font-h text-lg font-semibold" style={{ transform: "translateZ(35px)" }}>{s.title}</h3>
+                  <p className="mt-1 text-sm text-[var(--tx3)]" style={{ transform: "translateZ(20px)" }}>{s.desc}</p>
+                </TiltCard>
               </Reveal>
             );
           })}

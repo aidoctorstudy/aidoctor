@@ -26,7 +26,7 @@ export default function Pricing({ onSignup }) {
         <div className="mt-14 grid items-stretch gap-6 md:grid-cols-2">
           {/* FREE */}
           <Reveal>
-            <div className="glass flex h-full flex-col rounded-3xl p-8" data-testid="pricing-free">
+            <div className="glass glow-hover flex h-full flex-col rounded-3xl p-8" data-testid="pricing-free">
               <div className="text-sm font-bold text-[var(--tx2)]">{free.name}</div>
               <div className="font-h mt-2 text-5xl font-semibold">{free.amount}</div>
               <div className="mt-1 text-sm text-[var(--tx3)]">{free.period}</div>
@@ -45,7 +45,7 @@ export default function Pricing({ onSignup }) {
             <motion.div
               whileHover={{ y: -6 }}
               transition={{ type: "spring", stiffness: 260, damping: 20 }}
-              className="relative flex h-full flex-col rounded-3xl p-8"
+              className="relative flex h-full flex-col rounded-3xl p-8 animate-pulse-glow"
               style={{
                 background: "linear-gradient(160deg, rgba(37,99,235,0.16), rgba(6,182,212,0.10))",
                 border: "1px solid rgba(6,182,212,0.35)",

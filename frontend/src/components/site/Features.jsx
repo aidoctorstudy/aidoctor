@@ -16,8 +16,8 @@ export default function Features() {
             const Icon = f.icon;
             return (
               <Reveal key={f.title} delay={(i % 4) * 0.06}>
-                <TiltCard className="glass group h-full rounded-3xl p-6 transition-colors duration-300 hover:bg-[var(--card-hover)]" data-testid={`feature-card-${i}`}>
-                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[var(--p)]/25 to-[var(--p2)]/25 ring-1 ring-[var(--bd2)]" style={{ transform: "translateZ(60px)" }}>
+                <TiltCard className="glass glow-hover conic-glow group h-full rounded-3xl p-6 transition-colors duration-300 hover:bg-[var(--card-hover)]" data-testid={`feature-card-${i}`}>
+                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[var(--p)]/25 to-[var(--p2)]/25 ring-1 ring-[var(--bd2)] transition-shadow duration-300 group-hover:shadow-[0_0_28px_rgba(6,182,212,0.55)]" style={{ transform: "translateZ(60px)" }}>
                     <Icon className="h-6 w-6 text-[var(--pl)]" />
                   </div>
                   <h3 className="font-h text-lg font-semibold" style={{ transform: "translateZ(42px)" }}>{f.title}</h3>
