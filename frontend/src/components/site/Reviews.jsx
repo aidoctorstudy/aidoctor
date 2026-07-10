@@ -3,14 +3,21 @@ import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 import { Reveal } from "./primitives";
 import { fetchReviews } from "./api";
+import { DEFAULT_REVIEWS } from "./content";
 
 function initials(name = "") {
   return name.split(" ").map((w) => w[0]).slice(0, 2).join("").toUpperCase();
 }
 
 export default function Reviews({ onSignup }) {
-  const [reviews, setReviews] = useState([]);
-  useEffect(() => { fetchReviews().then(setReviews).catch(() => setReviews([])); }, []);
+  const [reviews, setReviews] = useState(DEFAULT_REVIEWS);
+  useEffect(() => {
+    fetchReviews()
+      .then((data) => { if (Array.isArray(data) && data.length) setReviews(data); })
+      .catch(() => {});
+  }, []);
+
+  const list = Array.isArray(reviews) && reviews.length ? reviews : DEFAULT_REVIEWS;
 
   return (
     <section className="relative overflow-hidden px-5 py-28 sm:px-8" data-testid="reviews-section">
@@ -32,7 +39,7 @@ export default function Reviews({ onSignup }) {
         </Reveal>
 
         <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {reviews.map((r, i) => (
+          {list.map((r, i) => (
             <Reveal key={r.id || i} delay={(i % 3) * 0.07}>
               <motion.div
                 whileHover={{ y: -5 }} transition={{ type: "spring", stiffness: 240, damping: 20 }}

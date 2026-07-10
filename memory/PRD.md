@@ -45,3 +45,21 @@ Tagline: "The AI Study Tool for Medical Students". Footer: "Study smarter. Save 
 ## Next Tasks
 - Port the authenticated study app (AI features) onto React + FastAPI + Emergent LLM key.
 - Add auth (via integration_playbook_expert_v2).
+
+## Deployment Fix (2026-07-10) — Vercel blank/"blue" screen RESOLVED
+- **Symptom:** Vercel production (aidoctorstudy.vercel.app / aidoctor.study) showed a blank dark-navy
+  screen with only the Emergent badge, despite deployment Status = Ready. Local build always worked.
+- **Root cause:** `Reviews.jsx` called `fetchReviews().then(setReviews)` then `reviews.map(...)`. On Vercel
+  the FastAPI backend is NOT deployed and `REACT_APP_BACKEND_URL` is unset, so the request resolved to
+  `/undefined/api/reviews` → SPA rewrite returned `index.html` (a STRING) with HTTP 200 → `reviews` became
+  a string → `reviews.map` threw `r.map is not a function` → whole React tree crashed → blank screen.
+- **Fix (frontend now self-contained; backend is optional live enhancement):**
+  - `content.js`: added `DEFAULT_REVIEWS` (6 bundled med-student reviews).
+  - `api.js`: `API` is null when `REACT_APP_BACKEND_URL` is absent; `fetchReviews` always returns an array,
+    `fetchStats` always returns a plain object or null (shape-validated, try/catch, 8s timeout).
+  - `Reviews.jsx`: seeds state with `DEFAULT_REVIEWS`, only replaces on a valid non-empty array, guards `.map`.
+  - `Hero.jsx`: merges live stats into the default object; never overwrites with a bad shape.
+  - `frontend/package.json`: pinned `"engines": { "node": "20.x" }` (React 19 needs Node 18+; future-proofs Vercel builds).
+- **Verified:** Rebuilt with `REACT_APP_BACKEND_URL=""` (exact Vercel condition) → renders fully, ZERO page
+  errors (was 1 crash before). Vercel Root Directory = `frontend` is CORRECT.
+- **User action required:** Push to GitHub via "Save to Github" so Vercel redeploys the fixed commit.

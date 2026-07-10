@@ -16,8 +16,9 @@ export default function Hero({ onSignup, onLogin }) {
   const [stats, setStats] = useState({ studying_now: 8, cards_today: 312, students_joined: 89 });
 
   useEffect(() => {
-    fetchStats().then(setStats).catch(() => {});
-    const id = setInterval(() => fetchStats().then(setStats).catch(() => {}), 15000);
+    const apply = (d) => { if (d) setStats((prev) => ({ ...prev, ...d })); };
+    fetchStats().then(apply).catch(() => {});
+    const id = setInterval(() => fetchStats().then(apply).catch(() => {}), 15000);
     return () => clearInterval(id);
   }, []);
 

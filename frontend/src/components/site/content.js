@@ -58,6 +58,17 @@ export const FAQS = [
   { q: "How is this different from a generic AI chatbot?", a: "AI Doctor is tuned specifically for medical education. Every subject, mode and explanation is designed for MBBS/nursing students with proper medical terminology and clinical relevance." },
 ];
 
+// Default reviews shipped with the bundle so the landing renders fully even when
+// the (optional) backend is unavailable — e.g. frontend-only hosts like Vercel.
+export const DEFAULT_REVIEWS = [
+  { id: "r1", name: "Aisha Khan", role: "MBBS · Year 3", rating: 5, text: "The Clinical Case Solver is unreal. It walks through differentials the exact way our examiners want. My OSCE prep went from panic to confidence." },
+  { id: "r2", name: "Daniel Osei", role: "USMLE Step 1", rating: 5, text: "I upload my lecture notes and get high-yield flashcards in seconds — spaced repetition built in. This replaced three other apps for me." },
+  { id: "r3", name: "Priya Nair", role: "NEET PG", rating: 5, text: "Pharmacology mnemonics that actually stick. I finally stopped confusing my beta blockers. Worth way more than the price." },
+  { id: "r4", name: "Liam Walsh", role: "PLAB Candidate", rating: 5, text: "Exam Prep Mode answers in proper PLAB format. It's like having a tutor who knows exactly what the exam wants to see." },
+  { id: "r5", name: "Sofia Rossi", role: "Nursing · Year 2", rating: 5, text: "Explanations are clear without being dumbed down. The anatomy explainer with clinical correlations is my favorite feature." },
+  { id: "r6", name: "Marcus Lee", role: "MBBS · Year 1", rating: 5, text: "Pathology finally makes sense — disease mechanisms explained step by step. I study faster and remember more." },
+];
+
 export const GUMROAD_URL = "https://hyperai3.gumroad.com/l/aidoctorstudypro";
 export const STUDENT_CODE = "MED20";
 export const CONTACT_EMAIL = "studevoai@gmail.com";
