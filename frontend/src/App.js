@@ -1,5 +1,4 @@
 import { useEffect, useState, useCallback } from "react";
-import { Toaster } from "sonner";
 import Navbar from "@/components/site/Navbar";
 import Hero from "@/components/site/Hero";
 import Features from "@/components/site/Features";
@@ -8,7 +7,10 @@ import Pricing from "@/components/site/Pricing";
 import Faq from "@/components/site/Faq";
 import Reviews from "@/components/site/Reviews";
 import Footer from "@/components/site/Footer";
-import SignupDialog from "@/components/site/SignupDialog";
+
+// The full AI Doctor product (Firebase login, quiz, flashcards, AI) is the
+// self-contained static app served from /app/. The marketing landing lives here.
+const APP_URL = "/app/index.html";
 
 function useTheme() {
   const [theme, setTheme] = useState(() => {
@@ -24,30 +26,21 @@ function useTheme() {
 
 export default function App() {
   const { theme, toggle } = useTheme();
-  const [dialog, setDialog] = useState({ open: false, mode: "signup" });
 
-  const openSignup = useCallback(() => setDialog({ open: true, mode: "signup" }), []);
-  const openLogin = useCallback(() => setDialog({ open: true, mode: "login" }), []);
+  const goToApp = useCallback(() => { window.location.assign(APP_URL); }, []);
 
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--tx)]">
-      <Navbar theme={theme} toggleTheme={toggle} onLogin={openLogin} onSignup={openSignup} />
+      <Navbar theme={theme} toggleTheme={toggle} onLogin={goToApp} onSignup={goToApp} />
       <main>
-        <Hero onSignup={openSignup} onLogin={openLogin} />
+        <Hero onSignup={goToApp} onLogin={goToApp} />
         <Features />
         <Subjects />
-        <Pricing onSignup={openSignup} />
-        <Reviews onSignup={openSignup} />
+        <Pricing onSignup={goToApp} />
+        <Reviews onSignup={goToApp} />
         <Faq />
       </main>
       <Footer />
-
-      <SignupDialog
-        open={dialog.open}
-        mode={dialog.mode}
-        onOpenChange={(v) => setDialog((d) => ({ ...d, open: v }))}
-      />
-      <Toaster position="top-center" theme={theme} richColors closeButton />
     </div>
   );
 }
