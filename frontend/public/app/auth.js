@@ -179,6 +179,20 @@ function showMedAuthErr(msg) {
  if(el) { el.textContent = msg; el.style.display = 'block'; }
 }
 
+/* When arriving from the marketing site (or any direct visit) while logged out,
+   skip the app's own duplicate landing and go straight to the auth form.
+   #login opens Log In mode, #signup (default) opens Sign Up mode. */
+try {
+ firebase.auth().onAuthStateChanged(function(user) {
+  if(!user) {
+   if(typeof goTo === 'function') goTo('pg-onboard');
+   if(location.hash === '#login' && typeof medAuthMode !== 'undefined' && medAuthMode !== 'login' && typeof toggleMedAuth === 'function') {
+    toggleMedAuth();
+   }
+  }
+ });
+} catch(e) { /* firebase unavailable */ }
+
 var medAuthMode = 'signup';
 function toggleMedAuth() {
  medAuthMode = medAuthMode === 'signup' ? 'login' : 'signup';

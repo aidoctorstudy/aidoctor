@@ -10,7 +10,8 @@ import Footer from "@/components/site/Footer";
 
 // The full AI Doctor product (Firebase login, quiz, flashcards, AI) is the
 // self-contained static app served from /app/. The marketing landing lives here.
-const APP_URL = "/app/index.html";
+const APP_LOGIN = "/app/index.html#login";
+const APP_SIGNUP = "/app/index.html#signup";
 
 function useTheme() {
   const [theme, setTheme] = useState(() => {
@@ -27,17 +28,18 @@ function useTheme() {
 export default function App() {
   const { theme, toggle } = useTheme();
 
-  const goToApp = useCallback(() => { window.location.assign(APP_URL); }, []);
+  const goLogin = useCallback(() => { window.location.assign(APP_LOGIN); }, []);
+  const goSignup = useCallback(() => { window.location.assign(APP_SIGNUP); }, []);
 
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--tx)]">
-      <Navbar theme={theme} toggleTheme={toggle} onLogin={goToApp} onSignup={goToApp} />
+      <Navbar theme={theme} toggleTheme={toggle} onLogin={goLogin} onSignup={goSignup} />
       <main>
-        <Hero onSignup={goToApp} onLogin={goToApp} />
+        <Hero onSignup={goSignup} onLogin={goLogin} />
         <Features />
         <Subjects />
-        <Pricing onSignup={goToApp} />
-        <Reviews onSignup={goToApp} />
+        <Pricing onSignup={goSignup} />
+        <Reviews onSignup={goSignup} />
         <Faq />
       </main>
       <Footer />
