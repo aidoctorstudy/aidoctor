@@ -29,4 +29,4 @@ AI Doctor is an educational tool only. It is not medical advice, not a medical d
 - Home: https://aidoctor.study/
 - Privacy Policy: https://aidoctor.study/privacy.html
 - Terms of Service: https://aidoctor.study/terms.html
-- Contact: studevoai@gmail.com
+- Contact: aidoctorstudy@gmail.com

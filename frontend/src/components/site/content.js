@@ -71,7 +71,7 @@ export const DEFAULT_REVIEWS = [
 
 export const GUMROAD_URL = "https://hyperai3.gumroad.com/l/aidoctorstudypro";
 export const STUDENT_CODE = "MED20";
-export const CONTACT_EMAIL = "studevoai@gmail.com";
+export const CONTACT_EMAIL = "aidoctorstudy@gmail.com";
 
 export const YEAR_OPTIONS = ["Pre-clinical (Yr 1–2)", "Clinical (Yr 3–5)", "Intern / Resident", "Nursing", "Other"];
 export const EXAM_OPTIONS = ["MBBS / University", "USMLE", "PLAB", "NEET PG", "Not sure yet"];
