@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Check, Star } from "lucide-react";
 import { Reveal } from "./primitives";
-import { PRICING, GUMROAD_URL, STUDENT_CODE } from "./content";
+import { PRICING, GUMROAD_URL } from "./content";
 
 function Item({ children, pro }) {
   return (
@@ -63,10 +63,6 @@ export default function Pricing({ onSignup }) {
             </motion.div>
           </Reveal>
         </div>
-
-        <Reveal delay={0.15} className="mt-8 text-center text-sm text-[var(--tx2)]">
-          Student code <span className="font-mono2 rounded-md bg-[var(--emerald)]/15 px-2 py-1 font-bold text-[var(--emerald)]">{STUDENT_CODE}</span> for 20% off
-        </Reveal>
       </div>
     </section>
   );
