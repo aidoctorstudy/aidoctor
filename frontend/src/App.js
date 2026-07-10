@@ -1,56 +1,53 @@
-import { useEffect } from "react";
-import "@/App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
-import { HOME } from "@/constants/testIds";
+import { useEffect, useState, useCallback } from "react";
+import { Toaster } from "sonner";
+import Navbar from "@/components/site/Navbar";
+import Hero from "@/components/site/Hero";
+import Features from "@/components/site/Features";
+import Subjects from "@/components/site/Subjects";
+import Pricing from "@/components/site/Pricing";
+import Faq from "@/components/site/Faq";
+import Reviews from "@/components/site/Reviews";
+import Footer from "@/components/site/Footer";
+import SignupDialog from "@/components/site/SignupDialog";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
-
-const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
-    }
-  };
-
+function useTheme() {
+  const [theme, setTheme] = useState(() => {
+    try { return localStorage.getItem("aid_theme") || "dark"; } catch { return "dark"; }
+  });
   useEffect(() => {
-    helloWorldApi();
-  }, []);
+    document.documentElement.setAttribute("data-theme", theme);
+    try { localStorage.setItem("aid_theme", theme); } catch { /* ignore */ }
+  }, [theme]);
+  const toggle = useCallback(() => setTheme((t) => (t === "dark" ? "light" : "dark")), []);
+  return { theme, toggle };
+}
+
+export default function App() {
+  const { theme, toggle } = useTheme();
+  const [dialog, setDialog] = useState({ open: false, mode: "signup" });
+
+  const openSignup = useCallback(() => setDialog({ open: true, mode: "signup" }), []);
+  const openLogin = useCallback(() => setDialog({ open: true, mode: "login" }), []);
 
   return (
-    <div>
-      <header className="App-header">
-        <a
-          data-testid={HOME.emergentLink}
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
-    </div>
-  );
-};
+    <div className="min-h-screen bg-[var(--bg)] text-[var(--tx)]">
+      <Navbar theme={theme} toggleTheme={toggle} onLogin={openLogin} onSignup={openSignup} />
+      <main>
+        <Hero onSignup={openSignup} onLogin={openLogin} />
+        <Features />
+        <Subjects />
+        <Pricing onSignup={openSignup} />
+        <Reviews onSignup={openSignup} />
+        <Faq />
+      </main>
+      <Footer />
 
-function App() {
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <SignupDialog
+        open={dialog.open}
+        mode={dialog.mode}
+        onOpenChange={(v) => setDialog((d) => ({ ...d, open: v }))}
+      />
+      <Toaster position="top-center" theme={theme} richColors closeButton />
     </div>
   );
 }
-
-export default App;
