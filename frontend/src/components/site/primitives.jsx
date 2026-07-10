@@ -21,7 +21,7 @@ export function Reveal({ children, delay = 0, y = 34, className = "", ...rest })
 }
 
 /* ---------- TiltCard: Apple-style mouse parallax + glare ---------- */
-export function TiltCard({ children, className = "", intensity = 10, ...rest }) {
+export function TiltCard({ children, className = "", intensity = 14, ...rest }) {
   const ref = useRef(null);
   const mx = useMotionValue(0.5);
   const my = useMotionValue(0.5);
@@ -48,7 +48,9 @@ export function TiltCard({ children, className = "", intensity = 10, ...rest }) 
       ref={ref}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
-      style={{ rotateX, rotateY, transformStyle: "preserve-3d", transformPerspective: 900 }}
+      whileHover={{ scale: 1.03 }}
+      style={{ rotateX, rotateY, transformStyle: "preserve-3d", transformPerspective: 650 }}
+      transition={{ type: "spring", stiffness: 260, damping: 20 }}
       className={`relative ${className}`}
       {...rest}
     >

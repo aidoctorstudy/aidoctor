@@ -43,11 +43,12 @@ export default function DnaHelix({ className = "" }) {
       ctx.clearRect(0, 0, w, h);
 
       const cx = w / 2;
-      const radius = Math.min(w * 0.28, 150);
-      const topPad = h * 0.08;
-      const usableH = h * 0.84;
-      const twist = 3.4;
-      const wobble = tilt.current * 0.5;
+      const radius = Math.min(w * 0.33, 180);
+      const topPad = h * 0.07;
+      const usableH = h * 0.86;
+      const twist = 3.6;
+      const wobble = tilt.current * 0.6;
+      const focal = radius * 3;
 
       const nodes = [];
       for (let i = 0; i < N; i++) {
@@ -56,9 +57,11 @@ export default function DnaHelix({ className = "" }) {
         const angle = p * Math.PI * twist + t + wobble;
         for (let s = 0; s < 2; s++) {
           const a = angle + s * Math.PI;
-          const x = cx + Math.sin(a) * radius;
+          const zz = Math.cos(a) * radius; // depth axis
+          const persp = focal / (focal - zz); // >1 near, <1 far
+          const x = cx + Math.sin(a) * radius * persp;
           const depth = (Math.cos(a) + 1) / 2; // 0 back .. 1 front
-          nodes.push({ x, y, depth, p, strand: s, i });
+          nodes.push({ x, y, depth, persp, p, strand: s, i });
         }
       }
 
@@ -68,10 +71,11 @@ export default function DnaHelix({ className = "" }) {
         const B = nodes[i * 2 + 1];
         const depth = (A.depth + B.depth) / 2;
         const g = ctx.createLinearGradient(A.x, A.y, B.x, B.y);
-        g.addColorStop(0, `rgba(96,165,250,${0.15 + depth * 0.4})`);
-        g.addColorStop(1, `rgba(110,231,183,${0.15 + depth * 0.4})`);
+        g.addColorStop(0, `rgba(96,165,250,${0.12 + depth * 0.45})`);
+        g.addColorStop(0.5, `rgba(103,232,249,${0.12 + depth * 0.5})`);
+        g.addColorStop(1, `rgba(110,231,183,${0.12 + depth * 0.45})`);
         ctx.strokeStyle = g;
-        ctx.lineWidth = 1 + depth * 1.6;
+        ctx.lineWidth = (0.8 + depth * 2) * ((A.persp + B.persp) / 2);
         ctx.beginPath();
         ctx.moveTo(A.x, A.y);
         ctx.lineTo(B.x, B.y);
@@ -81,21 +85,26 @@ export default function DnaHelix({ className = "" }) {
       // spheres sorted by depth (painter's algorithm)
       nodes.sort((a, b) => a.depth - b.depth);
       for (const n of nodes) {
-        const r = 2.4 + n.depth * 5.2;
-        const alpha = 0.25 + n.depth * 0.75;
+        const r = (2.2 + n.depth * 5.6) * n.persp;
+        const alpha = 0.2 + n.depth * 0.8;
         const cr = Math.round(lerp(37, 6, n.p));
         const cg = Math.round(lerp(99, 182, n.p));
         const cb = Math.round(lerp(235, 212, n.p));
-        const glow = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 2.6);
+        const glow = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 3);
         glow.addColorStop(0, `rgba(${cr},${cg},${cb},${alpha})`);
         glow.addColorStop(1, `rgba(${cr},${cg},${cb},0)`);
         ctx.fillStyle = glow;
         ctx.beginPath();
-        ctx.arc(n.x, n.y, r * 2.6, 0, Math.PI * 2);
+        ctx.arc(n.x, n.y, r * 3, 0, Math.PI * 2);
         ctx.fill();
+        // core with a bright highlight for a glossy 3D sphere look
         ctx.fillStyle = `rgba(${cr + 40},${cg + 40},${cb + 20},${alpha})`;
         ctx.beginPath();
         ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = `rgba(255,255,255,${alpha * 0.6})`;
+        ctx.beginPath();
+        ctx.arc(n.x - r * 0.3, n.y - r * 0.3, r * 0.35, 0, Math.PI * 2);
         ctx.fill();
       }
 

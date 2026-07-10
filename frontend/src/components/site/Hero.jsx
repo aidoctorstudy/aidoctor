@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { GraduationCap, ArrowRight } from "lucide-react";
 import { MagneticButton, CountUp, Reveal } from "./primitives";
 import DnaHelix from "./DnaHelix";
@@ -14,6 +14,12 @@ const STATS = [
 
 export default function Hero({ onSignup, onLogin }) {
   const [stats, setStats] = useState({ studying_now: 8, cards_today: 312, students_joined: 89 });
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
+  const helixY = useTransform(scrollYProgress, [0, 1], [0, 140]);
+  const helixRotate = useTransform(scrollYProgress, [0, 1], [0, 18]);
+  const helixScale = useTransform(scrollYProgress, [0, 1], [1, 0.82]);
+  const textY = useTransform(scrollYProgress, [0, 1], [0, -60]);
 
   useEffect(() => {
     fetchStats().then(setStats).catch(() => {});
@@ -28,7 +34,7 @@ export default function Hero({ onSignup, onLogin }) {
   ];
 
   return (
-    <section id="top" className="relative overflow-hidden px-5 pb-20 pt-28 sm:px-8 sm:pt-36" data-testid="hero">
+    <section ref={sectionRef} id="top" className="relative overflow-hidden px-5 pb-20 pt-28 sm:px-8 sm:pt-36" data-testid="hero" style={{ perspective: 1200 }}>
       {/* ambient orbs */}
       <div className="orb animate-floaty" style={{ width: 460, height: 460, top: -120, right: -80, background: "rgba(37,99,235,0.28)" }} />
       <div className="orb animate-floaty" style={{ width: 360, height: 360, bottom: -60, left: -100, background: "rgba(6,182,212,0.20)", animationDelay: "3s" }} />
@@ -36,7 +42,7 @@ export default function Hero({ onSignup, onLogin }) {
 
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
         {/* LEFT */}
-        <div className="text-center lg:text-left">
+        <motion.div style={{ y: textY }} className="text-center lg:text-left">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-[var(--bd2)] bg-[var(--p)]/10 px-4 py-1.5 text-xs font-bold tracking-wide text-[var(--pl)]">
               <GraduationCap className="h-4 w-4" /> Built for Medical Students
@@ -101,13 +107,14 @@ export default function Hero({ onSignup, onLogin }) {
               ))}
             </div>
           </Reveal>
-        </div>
+        </motion.div>
 
         {/* RIGHT — DNA helix */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          style={{ y: helixY, rotateY: helixRotate, scale: helixScale, transformStyle: "preserve-3d" }}
           className="relative mx-auto h-[380px] w-full max-w-md sm:h-[520px]"
         >
           <div className="ring-glow absolute inset-4 rounded-[40px]" />

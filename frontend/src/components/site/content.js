@@ -58,7 +58,7 @@ export const FAQS = [
   { q: "How is this different from a generic AI chatbot?", a: "AI Doctor is tuned specifically for medical education. Every subject, mode and explanation is designed for MBBS/nursing students with proper medical terminology and clinical relevance." },
 ];
 
-export const GUMROAD_URL = "https://studebot.gumroad.com/l/jlpryj";
+export const GUMROAD_URL = "https://hyperai3.gumroad.com/l/aidoctorstudypro";
 export const STUDENT_CODE = "MED20";
 export const CONTACT_EMAIL = "studevoai@gmail.com";
 

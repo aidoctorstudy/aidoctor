@@ -17,11 +17,11 @@ export default function Features() {
             return (
               <Reveal key={f.title} delay={(i % 4) * 0.06}>
                 <TiltCard className="glass group h-full rounded-3xl p-6 transition-colors duration-300 hover:bg-[var(--card-hover)]" data-testid={`feature-card-${i}`}>
-                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[var(--p)]/25 to-[var(--p2)]/25 ring-1 ring-[var(--bd2)]" style={{ transform: "translateZ(30px)" }}>
+                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[var(--p)]/25 to-[var(--p2)]/25 ring-1 ring-[var(--bd2)]" style={{ transform: "translateZ(60px)" }}>
                     <Icon className="h-6 w-6 text-[var(--pl)]" />
                   </div>
-                  <h3 className="font-h text-lg font-semibold" style={{ transform: "translateZ(24px)" }}>{f.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[var(--tx2)]">{f.desc}</p>
+                  <h3 className="font-h text-lg font-semibold" style={{ transform: "translateZ(42px)" }}>{f.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[var(--tx2)]" style={{ transform: "translateZ(24px)" }}>{f.desc}</p>
                 </TiltCard>
               </Reveal>
             );
