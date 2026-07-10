@@ -13,12 +13,11 @@
  *                        status to Firestore `gumroad_users` (35-day expiry).
  *   POST /checkpro    -> Body: { email } -> { is_pro } (reads Firestore).
  *
- * Secrets (wrangler secret put / dashboard):
+ * Secrets (already set on your Worker — names must match):
  *   GROQ_KEY               Groq API key            (chat text + transcribe)
- *   OPENROUTER_KEY         OpenRouter API key       (vision/image chat)
- *   FIREBASE_PROJECT_ID    e.g. ai-doctor-study
- *   FIREBASE_CLIENT_EMAIL  service-account email    (…@…iam.gserviceaccount.com)
- *   FIREBASE_PRIVATE_KEY   service-account private key (PEM; \n or real newlines)
+ *   OR_KEY                 OpenRouter API key       (vision/image chat)
+ *   FIREBASE_SA            FULL service-account JSON (one secret)
+ *   CLAUDE_KEY             (optional — not used by current routing)
  * Optional vars:
  *   GROQ_MODEL     default "llama-3.3-70b-versatile"
  *   VISION_MODEL   default "moonshotai/kimi-k2.6"
@@ -101,12 +100,12 @@ async function handleChat(request, env, json) {
 
   let endpoint, headers, model, provider;
   if (vision) {
-    if (!env.OPENROUTER_KEY) return json({ error: { message: "OPENROUTER_KEY not set", code: 500 } });
+    if (!env.OR_KEY) return json({ error: { message: "OR_KEY not set", code: 500 } });
     endpoint = OPENROUTER_CHAT;
     model = env.VISION_MODEL || "moonshotai/kimi-k2.6";
     provider = "kimi";
     headers = {
-      Authorization: `Bearer ${env.OPENROUTER_KEY}`,
+      Authorization: `Bearer ${env.OR_KEY}`,
       "Content-Type": "application/json",
       "HTTP-Referer": "https://aidoctor.study",
       "X-Title": "AI Doctor Study",
@@ -206,20 +205,28 @@ async function handleCheckPro(request, env, json) {
 /* ===================== FIRESTORE (service account) ===================== */
 let _tokenCache = { token: null, exp: 0 };
 
+// FIREBASE_SA is the full service-account JSON (one secret).
+function getSA(env) {
+  const sa = typeof env.FIREBASE_SA === "string" ? JSON.parse(env.FIREBASE_SA) : env.FIREBASE_SA;
+  if (!sa || !sa.client_email || !sa.private_key) throw new Error("FIREBASE_SA missing/invalid");
+  return sa;
+}
+
 async function getAccessToken(env) {
   if (_tokenCache.token && _tokenCache.exp > Date.now() + 60000) return _tokenCache.token;
+  const sa = getSA(env);
 
   const now = Math.floor(Date.now() / 1000);
   const header = { alg: "RS256", typ: "JWT" };
   const claim = {
-    iss: env.FIREBASE_CLIENT_EMAIL,
+    iss: sa.client_email,
     scope: "https://www.googleapis.com/auth/datastore",
     aud: GOOGLE_TOKEN,
     iat: now,
     exp: now + 3600,
   };
   const unsigned = `${b64url(JSON.stringify(header))}.${b64url(JSON.stringify(claim))}`;
-  const key = await importPrivateKey(env.FIREBASE_PRIVATE_KEY);
+  const key = await importPrivateKey(sa.private_key);
   const sig = await crypto.subtle.sign(
     { name: "RSASSA-PKCS1-v1_5" },
     key,
@@ -239,7 +246,7 @@ async function getAccessToken(env) {
 }
 
 function docUrl(env, col, id) {
-  const project = env.FIREBASE_PROJECT_ID;
+  const project = getSA(env).project_id;
   return `https://firestore.googleapis.com/v1/projects/${project}/databases/(default)/documents/${col}/${encodeURIComponent(id)}`;
 }
 
