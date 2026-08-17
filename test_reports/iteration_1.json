@@ -1,0 +1,19 @@
+{
+  "summary": "Full backend + frontend test of AI Doctor landing site. All 5 pytest backend tests pass (stats shape, reviews seeded 6+, create-review appears in list, waitlist create + stats increment, invalid email rejected via 422). Full Playwright UI walk-through passes: hero headline, DNA helix canvas, live counters, hero-signup + nav-signup + pricing-free all open signup-dialog, real POST /api/waitlist succeeds and shows signup-success, login mode dialog opens, theme toggle flips html[data-theme] dark<->light, all sections render (features/subjects/pricing/faq/reviews), 8 feature-card-*, 8 subject-card-*, 7 review-card-* (6 seeded + 1 from backend test), FAQ item expands, pricing-pro-btn opens Gumroad in a new tab (studebot.gumroad.com/l/jlpryj).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": ["/app/backend/tests/test_aidoctor_api.py", "/app/test_reports/pytest/pytest_results.xml"],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "server.py uses deprecated @app.on_event('startup'/'shutdown'); consider FastAPI lifespan handler.",
+    "GET /api/stats returns a fresh random studying_now on every request — fine for vanity metric but not deterministic across clients.",
+    "POST /api/reviews has no rate-limit / spam protection; public endpoint could be abused to inject reviews shown on landing page. Consider auth or moderation queue.",
+    "cards_today counter is incremented by waitlist join (unrelated semantics); mildly misleading but acceptable for marketing-only counter."
+  ],
+  "updated_files": ["/app/backend/tests/test_aidoctor_api.py"],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "seed_data_creation": "One TEST_ review and one TEST_ waitlist email inserted via pytest (kept, harmless — TEST_ prefixed).",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Backend test file at /app/backend/tests/test_aidoctor_api.py — reusable regression. All data-testids used in review request are wired correctly in the current build."
+}

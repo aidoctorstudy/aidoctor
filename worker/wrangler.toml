@@ -1,0 +1,21 @@
+name = "aidoctorstudy"
+main = "aidoctor-worker.js"
+compatibility_date = "2024-11-01"
+
+# Non-secret vars (safe to keep here)
+[vars]
+GROQ_MODEL = "llama-3.3-70b-versatile"
+VISION_MODEL = "moonshotai/kimi-k2.6"
+ALLOWED_ORIGIN = "*"        # set to "https://aidoctor.study" in production
+PRO_DAYS = "35"
+
+# Secrets — DO NOT put here. Add via:
+#   wrangler secret put GROQ_KEY
+#   wrangler secret put OPENROUTER_KEY
+#   wrangler secret put FIREBASE_PROJECT_ID
+#   wrangler secret put FIREBASE_CLIENT_EMAIL
+#   wrangler secret put FIREBASE_PRIVATE_KEY
+# (or Dashboard: Workers -> aidoctorstudy -> Settings -> Variables and Secrets)
+#
+# Gumroad: set your product Ping/Webhook URL to:
+#   https://aidoctorstudy.aidoctorstudy.workers.dev/gumroad

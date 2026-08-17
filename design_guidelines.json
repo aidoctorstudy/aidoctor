@@ -1,0 +1,118 @@
+{
+  "theme": "Medical Futurism / Apple-Level 3D Glow (Dark Mode Only)",
+  "concept": "A genuinely elevated, high-end medical-tech aesthetic utilizing deep blacks, bioluminescent cyan and emerald holographic accents, and 'Crystal Variant' glassmorphism. Moving beyond standard gradients into a spatial, dimensional web experience using CSS layering and Framer Motion.",
+  "typography": {
+    "headings": {
+      "family": "Cabinet Grotesk",
+      "fallback": "sans-serif",
+      "style": "Variable weight, tight tracking (tracking-tight to tracking-tighter).",
+      "usage": "Use for all main H1-H4 headings to create a bold, structural, editorial tech look."
+    },
+    "body": {
+      "family": "Manrope",
+      "fallback": "sans-serif",
+      "style": "Clean, highly readable, geometric humanist.",
+      "usage": "Paragraphs, buttons, small labels."
+    },
+    "mono": {
+      "family": "JetBrains Mono",
+      "usage": "Use for stats, counters, and technical 'AI' data points."
+    }
+  },
+  "colors": {
+    "base": {
+      "void_black": "#030712",
+      "obsidian": "#0A0A0A",
+      "surface_glass": "rgba(255, 255, 255, 0.03)"
+    },
+    "accent": {
+      "bioluminescent_cyan": "#06B6D4",
+      "surgical_emerald": "#10B981",
+      "clinical_white": "#FFFFFF",
+      "holographic_blue": "#3B82F6"
+    },
+    "text": {
+      "primary": "#F8FAFC",
+      "secondary": "#94A3B8",
+      "muted": "#475569"
+    },
+    "gradients": {
+      "aurora": "radial-gradient(circle at 50% 50%, rgba(6,182,212,0.15), rgba(16,185,129,0.05), transparent 50%)",
+      "text_glow": "linear-gradient(to right, #ffffff, #94a3b8)",
+      "border_trace": "linear-gradient(90deg, transparent, rgba(6,182,212,0.8), transparent)"
+    }
+  },
+  "surfaces": {
+    "crystal_glass": {
+      "background": "bg-white/[0.02] or bg-black/40",
+      "backdrop": "backdrop-blur-2xl backdrop-saturate-150",
+      "border": "border border-white/10",
+      "shadow": "shadow-[0_8px_32px_rgba(0,0,0,0.4)]",
+      "usage": "Sticky Nav, Review Cards, Dialogs"
+    },
+    "holo_card": {
+      "background": "bg-gradient-to-b from-white/[0.04] to-transparent",
+      "border": "border border-white/5 hover:border-cyan-500/30",
+      "glow": "hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]",
+      "transition": "transition-all duration-500 ease-out",
+      "usage": "Features, Subjects"
+    }
+  },
+  "layouts": {
+    "spacing": "Generous. Use p-8 to p-12 for internal card padding, gap-8 to gap-12 for sections. Ensure high contrast and breathing room.",
+    "grids": "Bento-style asymmetric layouts (Tetris Grid). Avoid boring 4x2 grids. Mix col-span-1 and col-span-2 cards for visual tension.",
+    "hero": "Spatial depth. Instead of a basic 2D layout, center the hero with massive typography. Place a massive CSS-rendered or SVG 'Holographic' medical sphere/nodes behind the UI, rotating slowly with Framer Motion, blurred at the edges.",
+    "features": "Bento Grid (md:grid-cols-3 or 4). Feature 1 (Clinical Case Solver) spans 2 columns. Others span 1. Use 'Tracing Beam' border effect on the primary feature."
+  },
+  "motion": {
+    "library": "framer-motion",
+    "springs": "type: 'spring', stiffness: 100, damping: 20",
+    "reveals": "Staggered fade-up (y: 30, opacity: 0 -> 1) on scroll.",
+    "hover": "Subtle scale (1.02) + border glow + inner element translation (e.g., icon shifts right 4px).",
+    "background": "Slow-moving glowing radial gradients using absolute positioning and CSS animations."
+  },
+  "components": {
+    "nav": "Floating Crystal Nav at the top. Not full width. Max-w-5xl, rounded-full, mt-6. backdrop-blur-2xl.",
+    "buttons": {
+      "primary": "Pill-shaped. bg-white text-black hover:bg-gray-200 font-bold tracking-tight shadow-[0_0_20px_rgba(255,255,255,0.3)].",
+      "secondary": "Glass pill. border border-white/20 bg-white/5 text-white hover:bg-white/10.",
+      "pro": "Moving gradient border, dark inner background, glowing cyan text."
+    },
+    "cards": "Holo-cards with 1px semi-transparent borders. Icons must be glowing (drop-shadow).",
+    "faq": "Shadcn accordion, but customized: border-b border-white/10, no background. Plus icon rotates 45deg on open."
+  },
+  "imagery": {
+    "usage": "Blend images with heavy black gradients (e.g., bg-black/60) so they act as texture, not flat photos.",
+    "urls": [
+      {
+        "url": "https://images.unsplash.com/photo-1781707362828-4df57744e243?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2ODl8MHwxfHNlYXJjaHw0fHxtZWRpY2FsJTIwc2NpZW5jZSUyMGZ1dHVyaXN0aWMlMjAzZHxlbnwwfHx8fDE3ODM2ODU5NzF8MA&ixlib=rb-4.1.0&q=85",
+        "category": "Hero Background Texture",
+        "description": "Abstract medical shapes, set to low opacity (10%) behind the main content."
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1690788210614-9052cffd8a14?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzd8MHwxfHNlYXJjaHwxfHxtZWRpY2FsJTIwc3R1ZGVudCUyMHN0dWR5aW5nJTIwZGFya3xlbnwwfHx8fDE3ODM2ODU5NzB8MA&ixlib=rb-4.1.0&q=85",
+        "category": "Reviews / Testimonials Backdrop",
+        "description": "Medical student studying in dark, use with heavy overlay."
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1546146477-15a587cd3fcb?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDB8MHwxfHNlYXJjaHwzfHxhYnN0cmFjdCUyMGRhcmslMjBmdXR1cmlzdGljJTIwdGVjaG5vbG9neXxlbnwwfHx8fDE3ODM2ODU5NzF8MA&ixlib=rb-4.1.0&q=85",
+        "category": "Pricing Section Background",
+        "description": "Abstract futuristic dark pattern."
+      }
+    ]
+  },
+  "accessibility": {
+    "contrast": "Ensure all text over gradients maintains 4.5:1 ratio. Use text-shadow on text overlapping any glow.",
+    "testing": "All buttons, links, and forms must have data-testid attributes (e.g., data-testid='hero-start-free-btn')."
+  },
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "Do NOT use HTML native selects or datepickers. Use Shadcn.",
+    "Do NOT center-align paragraph text. Keep body text left-aligned for readability.",
+    "Apply 'data-testid' to all interactive elements.",
+    "Avoid generic 'purple' AI slop. Stick to the Void Black + Bioluminescent Cyan/Emerald palette.",
+    "Implement the bento grids exactly as requested. Do NOT default to uniform 4x2 grids.",
+    "Use lucide-react for all standard icons, and framer-motion for all interactions.",
+    "DO NOT use generic transition: all. Target specific properties.",
+    "Ensure dark colors are not used as gradients."
+  ]
+}

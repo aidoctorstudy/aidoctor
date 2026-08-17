@@ -1,0 +1,33 @@
+{
+  "summary": "Frontend-only verification of the dual-layer AI Doctor app: React 3D 'Medical Futurism' landing at '/' and static app at '/app/index.html'. All acceptance criteria met.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "verified": {
+    "react_landing_root": "has <div id='root'> and all data-testids: navbar, hero, dna-helix, live-counters, pricing-free, pricing-pro, reviews-section, theme-toggle, hero-signup-btn/login-btn, nav-signup-btn/login-btn, pricing-free-btn, reviews-cta-btn all present (count=1 each)",
+    "feature_cards": "8/8 present (feature-card-0..7)",
+    "subject_cards": "8/8 present (subject-card-0..7)",
+    "faq_items": "4/4 present (faq-item-0..3)",
+    "review_cards": "6 review cards present",
+    "headline": "'The AI Study Tool for Medical Students' rendered in hero",
+    "theme_toggle": "flips html[data-theme] dark->light",
+    "cta_navigation": "hero-signup-btn, hero-login-btn, nav-signup-btn, nav-login-btn, pricing-free-btn, reviews-cta-btn all navigate to /app/index.html (full page navigation)",
+    "static_app_load": "#pg-landing present; nav logo shows 'AI Doctor'; #heroSignupBtn and #navSignupBtn present",
+    "onboarding_flow": "Clicking #heroSignupBtn shows #pg-onboard with #medEmail, #medPass, #obName, #startBtn and a visible 'Continue with Google' button",
+    "firebase": "window.firebase defined, firebase.apps.length = 1 (projectId ai-doctor-study)",
+    "lucide_icons": "176 lucide icons rendered, 0 empty",
+    "static_assets_200": "/app/styles.css, /app/01-core-utils.js, /app/06-quiz-clinical.js, /app/12-animations.js, /app/auth.js, /app/logo.svg all return 200"
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [],
+  "updated_files": [],
+  "success_rate": {"backend": "skipped", "frontend": "100%"},
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "React 3D landing served at '/', static app at '/app/index.html'. All 6 landing CTAs do window.location.assign('/app/index.html'). Firebase initialized on static app (Google OAuth will hit auth/unauthorized-domain on preview - EXPECTED). Static assets all 200."
+}

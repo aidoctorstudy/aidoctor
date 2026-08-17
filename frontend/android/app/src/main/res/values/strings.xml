@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">AI Doctor Study</string>
+    <string name="title_activity_main">AI Doctor Study</string>
+    <string name="package_name">com.aidoctor.study</string>
+    <string name="custom_url_scheme">com.aidoctor.study</string>
+</resources>

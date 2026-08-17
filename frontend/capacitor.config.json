@@ -1,0 +1,15 @@
+{
+  "appId": "com.aidoctor.study",
+  "appName": "AI Doctor Study",
+  "webDir": "build",
+  "server": {
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "GoogleAuth": {
+      "scopes": ["profile", "email"],
+      "serverClientId": "311598733090-9rsdqklpbn02gfjbunetn2i9733bqmg2.apps.googleusercontent.com",
+      "forceCodeForRefreshToken": true
+    }
+  }
+}
