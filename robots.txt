@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /app/index.html#
-
-Sitemap: https://aidoctor.study/sitemap.xml
