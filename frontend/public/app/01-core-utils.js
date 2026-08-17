@@ -63,7 +63,7 @@ async function callWorker(sys, msgs, imageBase64) {
 }
 
 var chatHist=[], chatMode='normal';
-var sName='', sYear='1', sExam='MBBS', qLeft=9999, isPro=true; // BETA: all free
+var sName='', sYear='1', sExam='MBBS', qLeft=9999, isPro=false; // 
 var hist=[], attTxt='', attFileName='';
 var cards=[], cardIdx=0, fcCount=8;
 var totalXP=0, totalQs=0, totalCards=0, totalCases=0;
