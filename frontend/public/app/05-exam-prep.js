@@ -294,7 +294,9 @@ document.getElementById('makeCardsBtn').onclick=async function(){
  if(!isPro){qLeft--;updateBadge();}
  var sys='You are a flashcard generator. Create flashcards from the provided content. Return ONLY a raw JSON array, no markdown, no backticks. Format: [{"q":"question or term","a":"answer or definition","image":"wikipedia article name"}]. Create EXACTLY '+fcCount+' flashcards. Focus on high-yield facts. IMAGE RULES: Only set the "image" field when the card is about a CONCRETE VISUAL medical thing that has a clear textbook image — specific diseases (e.g. "Psoriasis"), anatomical structures (e.g. "Femur"), organs, cells, pathology, X-rays, or named drugs. Use the exact medical article name. For ABSTRACT topics (definitions, concepts, statistics, methods, lists, "types of", "tools of", "principles of", classifications, epidemiology concepts) set image to empty string "". When unsure, use empty string. A wrong or unrelated image is much worse than no image.';
  try{
- var res=await fetch(WU,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system:sys,messages:[{role:'user',content:'Create '+fcCount+' medical flashcards from:\n\n'+text.substring(0,3000)}]})});
+ var fbUser=firebase.auth().currentUser;
+ var idToken=fbUser?await fbUser.getIdToken():'';
+ var res=await fetch(WU,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:'Create '+fcCount+' medical flashcards from:\n\n'+text.substring(0,3000), history:[], idToken:idToken})});
  var data=await res.json();
  var raw=(data.reply||'[]').replace(/```json|```/g,'').trim();
  cards=JSON.parse(raw);cardIdx=0;

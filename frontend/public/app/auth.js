@@ -12,6 +12,25 @@ var fbApp = firebase.initializeApp({
 var fbAuth = firebase.auth();
 var gProvider = new firebase.auth.GoogleAuthProvider();
 
+// Handle redirect result when user comes back from Google OAuth
+firebase.auth().getRedirectResult().then(function(result) {
+  if (result && result.user) {
+    var user = result.user;
+    var savedName = localStorage.getItem('aid_name_' + user.uid);
+    var savedYear = localStorage.getItem('aid_year_' + user.uid);
+    if(savedName && savedYear) {
+      sName = savedName; sYear = savedYear; sExam = localStorage.getItem('aid_exam_' + user.uid) || 'MBBS';
+      enterMedApp();
+    } else {
+      sName = user.displayName || 'Doctor';
+      document.getElementById('obName').value = sName;
+      enterMedApp();
+    }
+  }
+}).catch(function(err) {
+  console.log('Redirect result error:', err.message);
+});
+
 firebase.auth().onAuthStateChanged(function(user) {
  if(user && !sName) {
  var savedName = localStorage.getItem('aid_name_' + user.uid);

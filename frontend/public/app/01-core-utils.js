@@ -39,10 +39,14 @@ async function callWorker(sys, msgs, imageBase64) {
  };
  }
  }
+ var fbUser = firebase.auth().currentUser;
+ var idToken = fbUser ? await fbUser.getIdToken() : '';
+ var lastMsg = finalMsgs.length > 0 ? finalMsgs[finalMsgs.length-1] : null;
+ var histMsgs = finalMsgs.length > 0 ? finalMsgs.slice(0, -1) : [];
  var res = await fetch(WU, {
  method:'POST',
  headers:{'Content-Type':'application/json'},
- body:JSON.stringify({system:sys||'', messages:finalMsgs, max_tokens:2000, pro: isPro}),
+ body:JSON.stringify({message: lastMsg ? lastMsg.content : '', history: histMsgs, idToken: idToken}),
  signal:controller.signal
  });
  clearTimeout(to);

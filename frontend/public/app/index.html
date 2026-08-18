@@ -10,9 +10,15 @@
 <meta property="og:description" content="AI-powered medical education platform for future doctors. Flashcards, clinical cases, lecture summaries and more."/>
 <meta property="og:url" content="https://aidoctor.study"/>
 <meta property="og:type" content="website"/>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="AI Doctor | aidoctor.study"/>
-<meta name="twitter:description" content="AI-powered medical education platform for future doctors."/>
+<meta property="og:image" content="https://aidoctor.study/logo.svg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:site_name" content="AI Doctor Study"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="AI Doctor Study — AI for Medical Students"/>
+<meta name="twitter:description" content="AI-powered flashcards, clinical cases, lecture notes and MCQs. Free for MBBS, USMLE, PLAB students."/>
+<meta name="twitter:image" content="https://aidoctor.study/logo.svg"/>
+<link rel="canonical" href="https://aidoctor.study/app/"/>
 <meta name="theme-color" content="#0F172A"/>
 <link rel="icon" href="logo.svg" type="image/svg+xml"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -33,6 +39,7 @@
 </head>
 <body>
 
+<a href="#mainContent" class="skip-link" style="position:absolute;top:-40px;left:0;background:#0EA5E9;color:#fff;padding:8px 16px;border-radius:0 0 8px 0;font-weight:700;z-index:9999" onfocus="this.style.top='0'" onblur="this.style.top='-40px'">Skip to main content</a>
 <div class="bg-orbs"><div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div></div>
 <div class="xp-popup" id="xpPopup">+10 XP </div>
 
@@ -62,7 +69,7 @@
 </div>
 
 <!-- LANDING -->
-<div class="page" id="pg-landing">
+<div class="page on" id="pg-landing">
  <nav>
  <div class="nav-logo">
  <div class="nav-logo-icon"><img src="logo.svg" alt="AI Doctor Study" style="width:100%;height:100%;object-fit:contain"></div>
@@ -181,13 +188,13 @@
  <footer>
  <div class="f-logo">AI Doctor</div>
  <p>Study smarter. Save lives.</p>
- <div class="f-links"><a href="#features">Features</a><a href="#subjects">Subjects</a><a href="#pricing">Pricing</a><a href="mailto:studevoai@gmail.com">Contact</a></div>
+ <div class="f-links"><a href="#features">Features</a><a href="#subjects">Subjects</a><a href="#pricing">Pricing</a><a href="mailto:aidoctorstudy@gmail.com">Contact</a></div>
  <p style="margin-top:1.5rem">© 2026 AI Doctor | aidoctor.study. All rights reserved.</p>
  </footer>
 </div>
 
 <!-- ONBOARD -->
-<div class="page on" id="pg-onboard">
+<div class="page" id="pg-onboard">
  <div class="onboard-wrap">
  <div class="ob-card">
  <div class="ob-logo">
@@ -265,6 +272,12 @@
  </select>
  </div>
 
+ <!-- Terms acceptance (shown for Sign Up) -->
+ <label id="medTermsWrap" style="display:flex;align-items:flex-start;gap:8px;margin:-2px 0 1rem;font-size:12px;line-height:1.5;color:var(--tx3);font-weight:600;cursor:pointer">
+ <input type="checkbox" id="medAcceptTerms" style="margin-top:2px;flex:none;width:15px;height:15px;accent-color:#2563eb;cursor:pointer"/>
+ <span>I accept the <a href="/terms.html" target="_blank" rel="noopener" style="color:var(--p-lite);font-weight:800;text-decoration:underline">Terms of Service</a> and <a href="/privacy.html" target="_blank" rel="noopener" style="color:var(--p-lite);font-weight:800;text-decoration:underline">Privacy Policy</a>, and understand AI Doctor is an educational tool that can make mistakes and is not medical advice.</span>
+ </label>
+
  <button class="ob-btn" id="startBtn" onclick="signUpEmail()">Start Studying </button>
 
  <div style="text-align:center;margin-top:1rem;font-size:13px;color:var(--tx3);font-weight:600" id="medAuthToggle">
@@ -285,7 +298,7 @@
 <!-- APP -->
 <div class="page" id="pg-app">
  <div class="app-layout">
- <div class="sidebar">
+ <div class="sidebar" role="navigation" aria-label="Main navigation">
  <div class="sidebar-logo"><img src="logo.svg" alt="AI Doctor Study" style="width:100%;height:100%;object-fit:contain"></div>
  <button class="side-btn on" data-panel="dash" title="Dashboard"><i data-lucide="layout-dashboard"></i></button>
  <button class="side-btn" data-panel="chat" title="Ask AI"><i data-lucide="message-circle"></i></button>
@@ -316,7 +329,7 @@
  <div class="side-spacer"></div>
  <div class="side-avatar" id="sideAvatar">M</div>
  </div>
- <div class="app-main">
+ <div id="mainContent" class="app-main" role="main">
  <div class="app-topbar">
  <div class="topbar-left">
  <div class="streak-badge"><span id="streakCount">1</span> Day</div>
@@ -382,7 +395,7 @@
  <button class="mode-btn pr" data-mode="cram" onclick="setMode('cram')"><i data-lucide="zap"></i> Exam Cram</button>
  </div>
  <div class="mode-desc-bar" id="modeDescBar"><b>Explain Mode</b>— Clear medical explanation with clinical relevance</div>
- <div class="chat-msgs" id="chatMsgs"></div>
+ <div class="chat-msgs" id="chatMsgs" aria-live="polite" aria-label="Chat messages" role="log"></div>
  <div class="quick-chips">
  <div class="qchip" data-q="Explain the brachial plexus" onclick="sendQuickQ(this.dataset.q)">Brachial Plexus</div>
  <div class="qchip" data-q="How does metformin work?" onclick="sendQuickQ(this.dataset.q)">Metformin MOA</div>
@@ -496,21 +509,7 @@
  <div class="qg-subj-card" data-subj="Pathology" onclick="qgPickSubj(this)"><div class="qg-subj-icon"><i data-lucide="microscope"></i></div><div class="qg-subj-name">Pathology</div></div>
  <div class="qg-subj-card" data-subj="Physiology" onclick="qgPickSubj(this)"><div class="qg-subj-icon"><i data-lucide="activity"></i></div><div class="qg-subj-name">Physiology</div></div>
  <div class="qg-subj-card" data-subj="Clinical Medicine" onclick="qgPickSubj(this)"><div class="qg-subj-icon"><i data-lucide="stethoscope"></i></div><div class="qg-subj-name">Clinical</div></div>
- <div class="qg-subj-card" data-subj="Surgery" onclick="qgPickSubj(this)"><div class="qg-subj-icon"><i data-lucide="scissors"></i></div><div class="qg-subj-name">Surgery</div></div>
- <div class="qg-subj-card" data-subj="Psychiatry" onclick="qgPickSubj(this)"><div class="qg-subj-icon"><i data-lucide="brain"></i></div><div class="qg-subj-name">Psychiatry</div></div>
- <div class="qg-subj-card" data-subj="Paediatrics" onclick="qgPickSubj(this)"><div class="qg-subj-icon"><i data-lucide="baby"></i></div><div class="qg-subj-name">Paediatrics</div></div>
- <div class="qg-subj-card" data-subj="Gynaecology" onclick="qgPickSubj(this)"><div class="qg-subj-icon"><i data-lucide="heart-pulse"></i></div><div class="qg-subj-name">Gynae</div></div>
- <div class="qg-subj-card" data-subj="Obstetrics" onclick="qgPickSubj(this)"><div class="qg-subj-icon"><i data-lucide="baby"></i></div><div class="qg-subj-name">OBS</div></div>
- <div class="qg-subj-card" data-subj="ENT" onclick="qgPickSubj(this)"><div class="qg-subj-icon"><i data-lucide="ear"></i></div><div class="qg-subj-name">ENT</div></div>
- <div class="qg-subj-card" data-subj="Ophthalmology" onclick="qgPickSubj(this)"><div class="qg-subj-icon"><i data-lucide="eye"></i></div><div class="qg-subj-name">Eye</div></div>
- <div class="qg-subj-card" data-subj="Community Medicine" onclick="qgPickSubj(this)"><div class="qg-subj-icon"><i data-lucide="users"></i></div><div class="qg-subj-name">Community</div></div>
- <div class="qg-subj-card" data-subj="Forensic Medicine" onclick="qgPickSubj(this)"><div class="qg-subj-icon"><i data-lucide="scale"></i></div><div class="qg-subj-name">Forensic</div></div>
  </div>
- <div id="qgSystemWrap" style="display:none;margin-top:.8rem">
-  <div style="font-size:11px;font-weight:800;color:var(--tx3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">System (optional)</div>
-  <div id="qgSystemBtns" style="display:flex;gap:6px;flex-wrap:wrap"></div>
- </div>
-
  <div style="font-size:12px;font-weight:800;color:var(--tx2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.6rem">Difficulty</div>
  <div class="qg-diff-row">
  <button class="qg-diff-btn on" onclick="qgPickDiff(this,'Easy')">Easy</button>
@@ -819,16 +818,11 @@
  <button class="ep-subj-btn" data-subj="Microbiology" onclick="epPickSubj(this)">Microbiology</button>
  <button class="ep-subj-btn" data-subj="Medicine" onclick="epPickSubj(this)">Medicine</button>
  <button class="ep-subj-btn" data-subj="Surgery" onclick="epPickSubj(this)">Surgery</button>
- <button class="ep-subj-btn" data-subj="Paediatrics" onclick="epPickSubj(this)">Paediatrics</button>
- <button class="ep-subj-btn" data-subj="Gynaecology" onclick="epPickSubj(this)">Gynaecology</button>
- <button class="ep-subj-btn" data-subj="Obstetrics" onclick="epPickSubj(this)">Obstetrics</button>
+ <button class="ep-subj-btn" data-subj="Pediatrics" onclick="epPickSubj(this)">Pediatrics</button>
+ <button class="ep-subj-btn" data-subj="Gynae/Obs" onclick="epPickSubj(this)">Gynae/Obs</button>
  <button class="ep-subj-btn" data-subj="Psychiatry" onclick="epPickSubj(this)">Psychiatry</button>
  <button class="ep-subj-btn" data-subj="ENT" onclick="epPickSubj(this)">ENT</button>
  <button class="ep-subj-btn" data-subj="Ophthalmology" onclick="epPickSubj(this)">Ophthalmology</button>
- </div>
- <div id="epSystemWrap" style="display:none;margin-top:.8rem;margin-bottom:.6rem">
-  <div style="font-size:11px;font-weight:800;color:var(--tx3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">System (optional)</div>
-  <div id="epSystemBtns" style="display:flex;gap:6px;flex-wrap:wrap"></div>
  </div>
  <h3>Difficulty</h3>
  <div class="ep-opts-row">
@@ -928,7 +922,7 @@
  <div class="sim-type-card on" data-simtype="General" onclick="simPickType(this)"><div class="sim-type-icon"><i data-lucide="stethoscope"></i></div><div class="sim-type-name">General Medicine</div></div>
  <div class="sim-type-card" data-simtype="Emergency" onclick="simPickType(this)"><div class="sim-type-icon"><i data-lucide="siren"></i></div><div class="sim-type-name">Emergency</div></div>
  <div class="sim-type-card" data-simtype="Surgery" onclick="simPickType(this)"><div class="sim-type-icon"><i data-lucide="scissors"></i></div><div class="sim-type-name">Surgery</div></div>
- <div class="sim-type-card" data-simtype="Pediatrics" onclick="simPickType(this)"><div class="sim-type-icon"><i data-lucide="baby"></i></div><div class="sim-type-name">Paediatrics</div></div>
+ <div class="sim-type-card" data-simtype="Pediatrics" onclick="simPickType(this)"><div class="sim-type-icon"><i data-lucide="baby"></i></div><div class="sim-type-name">Pediatrics</div></div>
  <div class="sim-type-card" data-simtype="ICU" onclick="simPickType(this)"><div class="sim-type-icon"><i data-lucide="heart-pulse"></i></div><div class="sim-type-name">ICU</div></div>
  <div class="sim-type-card" data-simtype="Rare Disease" onclick="simPickType(this)"><div class="sim-type-icon"><i data-lucide="dna"></i></div><div class="sim-type-name">Rare Disease</div></div>
  </div>
@@ -1816,7 +1810,7 @@
  <script src="12-animations.js"></script>
  <script src="auth.js"></script>
 
-<div id="toastStack" class="toast-stack"></div>
+<div id="toastStack" aria-live="assertive" aria-atomic="true" class="toast-stack"></div>
 <div class="meme-ach-popup" id="memeAchPopup">
  <div class="meme-ach-icon" id="memeAchIcon"></div>
  <div class="meme-ach-title">Achievement Unlocked</div>
